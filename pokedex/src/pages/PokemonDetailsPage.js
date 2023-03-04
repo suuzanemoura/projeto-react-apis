@@ -1,3 +1,9 @@
+import { Header } from "../components/Header";
+
 export const PokemonDetailsPage = () => {
-  return <div>Aqui em breve vai ter os detalhes do seu pokemon favorito.</div>;
+  return (
+    <div>
+      <Header /> Aqui em breve vai ter os detalhes do seu pokemon favorito.
+    </div>
+  );
 };

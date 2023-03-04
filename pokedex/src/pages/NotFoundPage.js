@@ -1,10 +1,10 @@
 import { Header } from "../components/Header";
 
-export const PokedexPage = () => {
+export const NotFoundPage = () => {
   return (
     <div>
       <Header />
-      Pokedex em breve.
+      Ops! Essa página foi levada pela Equipe Rocket!
     </div>
   );
 };
