@@ -1,3 +1,4 @@
+import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 
 export const PokedexPage = () => {
@@ -5,6 +6,7 @@ export const PokedexPage = () => {
     <div>
       <Header />
       Pokedex em breve.
+      <Footer />
     </div>
   );
 };
