@@ -22,7 +22,7 @@ export default function useRequestData(initialState, path) {
 
   useEffect(() => {
     requestData();
-  }, [path]);
+  }, []);
 
   return [data, isLoading, loaded, error];
 }

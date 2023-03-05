@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Button, Image } from "@chakra-ui/react";
+import { Box, Button, Image } from "@chakra-ui/react";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import Logo from "../assets/imgs/Pokemon_Logo.svg";
 import { goToHomePage, goToPokedexPage } from "../routes/coordinator";
@@ -23,15 +23,10 @@ export const Header = () => {
               justifyContent="start"
             ></Box>
             <Box display="flex" justifyContent="center">
-              <Image src={Logo} />
+              <Image src={Logo} alt="Logo do Pokémon" />
             </Box>
             <Box display="flex" justifyContent="end">
               <Button
-                bg="#33A4F5"
-                color="white"
-                w="18rem"
-                h="4.625rem"
-                fontSize="2xl"
                 onClick={() => {
                   goToPokedexPage(navigate);
                 }}
@@ -45,25 +40,15 @@ export const Header = () => {
         return (
           <>
             <Box display="flex" justifyContent="start">
-              <Button
-                fontSize="2xl"
-                variant="link"
-                color="black"
-                onClick={() => goToHomePage(navigate)}
-              >
+              <Button variant="link" onClick={() => goToHomePage(navigate)}>
                 <ChevronLeftIcon w={25} h={25} /> Voltar para início
               </Button>
             </Box>
             <Box display="flex" justifyContent="center">
-              <Image src={Logo} />
+              <Image src={Logo} alt="Logo do Pokémon" />
             </Box>
             <Box display="flex" justifyContent="end">
               <Button
-                bg="#33A4F5"
-                color="white"
-                w="18rem"
-                h="4.625rem"
-                fontSize="2xl"
                 onClick={() => {
                   goToPokedexPage(navigate);
                 }}
@@ -77,17 +62,12 @@ export const Header = () => {
         return (
           <>
             <Box display="flex" justifyContent="start">
-              <Button
-                fontSize="2xl"
-                variant="link"
-                color="black"
-                onClick={() => goToHomePage(navigate)}
-              >
+              <Button variant="link" onClick={() => goToHomePage(navigate)}>
                 <ChevronLeftIcon w={25} h={25} /> Todos Pokémons
               </Button>
             </Box>
             <Box display="flex" justifyContent="center">
-              <Image src={Logo} />
+              <Image src={Logo} alt="Logo do Pokémon" />
             </Box>
             <Box
               w="18rem"
@@ -103,26 +83,16 @@ export const Header = () => {
         return (
           <>
             <Box display="flex" justifyContent="start">
-              <Button
-                fontSize="2xl"
-                variant="link"
-                color="black"
-                onClick={() => goToHomePage(navigate)}
-              >
+              <Button variant="link" onClick={() => goToHomePage(navigate)}>
                 <ChevronLeftIcon w={25} h={25} /> Todos Pokémons
               </Button>
             </Box>
             <Box display="flex" justifyContent="center">
-              <Image src={Logo} />
+              <Image src={Logo} alt="Logo do Pokémon" />
             </Box>
             <Box display="flex" justifyContent="end">
               <Button
-                bg="#33A4F5"
-                color="white"
-                w="13.75rem"
-                h="4.625rem"
-                fontSize="md"
-                fontWeight="400"
+                variant="addPokedex"
                 onClick={() => {
                   goToPokedexPage(navigate);
                 }}
@@ -135,18 +105,16 @@ export const Header = () => {
       default:
         return (
           <>
-            <Box display="flex" justifyContent="start">
-              <Button
-                fontSize="2xl"
-                variant="link"
-                color="black"
-                onClick={() => goToHomePage(navigate)}
-              >
-                <ChevronLeftIcon w={25} h={25} /> Voltar para início
-              </Button>
-            </Box>
+            <Box
+              w="18rem"
+              h="4.625rem"
+              fontSize="2xl"
+              visibility="hidden"
+              display="flex"
+              justifyContent="start"
+            ></Box>
             <Box display="flex" justifyContent="center">
-              <Image src={Logo} />
+              <Image src={Logo} alt="Logo do Pokémon" />
             </Box>
             <Box
               w="18rem"
@@ -164,7 +132,7 @@ export const Header = () => {
   return (
     <Box
       as="nav"
-      bg="red"
+      bg="white"
       h="10rem"
       px="3rem"
       display="grid"
