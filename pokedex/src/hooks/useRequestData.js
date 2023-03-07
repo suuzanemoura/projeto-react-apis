@@ -7,10 +7,10 @@ export default function useRequestData(initialState, path) {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
 
-  const requestData = async () => {
+  const requestData = async (path) => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`${path}`);
+      const response = await axios.get(path);
       setData(response.data);
       setIsLoading(false);
       setLoaded(true);
@@ -21,8 +21,8 @@ export default function useRequestData(initialState, path) {
   };
 
   useEffect(() => {
-    requestData();
-  }, []);
+    requestData(path);
+  }, [path]);
 
   return [data, isLoading, loaded, error];
 }

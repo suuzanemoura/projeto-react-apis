@@ -14,18 +14,10 @@ export const Header = () => {
       case "/":
         return (
           <>
-            <Box
-              w="18rem"
-              h="4.625rem"
-              fontSize="2xl"
-              visibility="hidden"
-              display="flex"
-              justifyContent="start"
-            ></Box>
-            <Box display="flex" justifyContent="center">
-              <Image src={Logo} alt="Logo do Pokémon" />
+            <Box display="flex" justifyContent="center" gridColumn={2}>
+              <Image src={Logo} alt="Logo do Pokémon" minW={"8rem"} />
             </Box>
-            <Box display="flex" justifyContent="end">
+            <Box display="flex" justifyContent="end" gridColumn={3}>
               <Button
                 onClick={() => {
                   goToPokedexPage(navigate);
@@ -39,15 +31,15 @@ export const Header = () => {
       case `/page/${params.pageNumber}`:
         return (
           <>
-            <Box display="flex" justifyContent="start">
+            <Box display="flex" justifyContent="start" gridColumn={1}>
               <Button variant="link" onClick={() => goToHomePage(navigate)}>
                 <ChevronLeftIcon w={25} h={25} /> Voltar para início
               </Button>
             </Box>
-            <Box display="flex" justifyContent="center">
-              <Image src={Logo} alt="Logo do Pokémon" />
+            <Box display="flex" justifyContent="center" gridColumn={2}>
+              <Image src={Logo} alt="Logo do Pokémon" minW={"8rem"} />
             </Box>
-            <Box display="flex" justifyContent="end">
+            <Box display="flex" justifyContent="end" gridColumn={3}>
               <Button
                 onClick={() => {
                   goToPokedexPage(navigate);
@@ -61,36 +53,28 @@ export const Header = () => {
       case "/pokedex":
         return (
           <>
-            <Box display="flex" justifyContent="start">
+            <Box display="flex" justifyContent="start" gridColumn={1}>
               <Button variant="link" onClick={() => goToHomePage(navigate)}>
                 <ChevronLeftIcon w={25} h={25} /> Todos Pokémons
               </Button>
             </Box>
-            <Box display="flex" justifyContent="center">
-              <Image src={Logo} alt="Logo do Pokémon" />
+            <Box display="flex" justifyContent="center" gridColumn={2}>
+              <Image src={Logo} alt="Logo do Pokémon" minW={"8rem"} />
             </Box>
-            <Box
-              w="18rem"
-              h="4.625rem"
-              fontSize="2xl"
-              visibility="hidden"
-              display="flex"
-              justifyContent="end"
-            ></Box>
           </>
         );
       case `/pokemon/${params.pokemon}`:
         return (
           <>
-            <Box display="flex" justifyContent="start">
+            <Box display="flex" justifyContent="start" gridColumn={1}>
               <Button variant="link" onClick={() => goToHomePage(navigate)}>
                 <ChevronLeftIcon w={25} h={25} /> Todos Pokémons
               </Button>
             </Box>
-            <Box display="flex" justifyContent="center">
-              <Image src={Logo} alt="Logo do Pokémon" />
+            <Box display="flex" justifyContent="center" gridColumn={2}>
+              <Image src={Logo} alt="Logo do Pokémon" minW={"8rem"} />
             </Box>
-            <Box display="flex" justifyContent="end">
+            <Box display="flex" justifyContent="end" gridColumn={3}>
               <Button
                 variant="addPokedex"
                 onClick={() => {
@@ -104,27 +88,9 @@ export const Header = () => {
         );
       default:
         return (
-          <>
-            <Box
-              w="18rem"
-              h="4.625rem"
-              fontSize="2xl"
-              visibility="hidden"
-              display="flex"
-              justifyContent="start"
-            ></Box>
-            <Box display="flex" justifyContent="center">
-              <Image src={Logo} alt="Logo do Pokémon" />
-            </Box>
-            <Box
-              w="18rem"
-              h="4.625rem"
-              fontSize="2xl"
-              visibility="hidden"
-              display="flex"
-              justifyContent="end"
-            ></Box>
-          </>
+          <Box display="flex" justifyContent="center" gridColumn={2}>
+            <Image src={Logo} alt="Logo do Pokémon" minW={"8rem"} />
+          </Box>
         );
     }
   };

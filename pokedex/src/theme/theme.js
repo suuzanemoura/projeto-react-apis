@@ -17,6 +17,9 @@ const theme = extendTheme({
         200: "#FF3333",
         300: "#E00000",
       },
+      yellow: {
+        100: "#ffc400",
+      },
     },
   },
   styles: {
@@ -42,14 +45,6 @@ const theme = extendTheme({
             xl: "18rem",
           },
           h: "4.625rem",
-        },
-        "2xs": {
-          w: "13.75rem",
-          h: "4.625rem",
-        },
-        "3xs": {
-          w: "9.125rem",
-          h: "2.375rem",
         },
       },
       variants: {
@@ -106,10 +101,11 @@ const theme = extendTheme({
           bg: "white",
           color: "black",
           _hover: {
-            bg: "pokedex.blue.100",
+            transform: " scale(1.2) translateY(-5px) translateX(-5px)",
+            boxShadow: "2px 2px 20px 1px rgba(0, 0, 0, 0.1)",
           },
           _active: {
-            bg: "pokedex.blue.200",
+            bg: "pokedex.yellow.100",
           },
         },
         delete: {
@@ -131,7 +127,7 @@ const theme = extendTheme({
           h: "1.5rem",
           textDecoration: "underline",
           _hover: {
-            color: "pokedex.blue.200",
+            transform: " scale(1.2) translateY(-5px) translateX(5px)",
           },
           _active: {
             color: "pokedex.blue.300",
