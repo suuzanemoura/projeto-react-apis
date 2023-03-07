@@ -11,41 +11,20 @@ import {
   Image,
   Text,
 } from "@chakra-ui/react";
+
 import useRequestData from "../hooks/useRequestData";
-import Poison from "../assets/imgs/PokemonCard/poison.png";
-import Grass from "../assets/imgs/PokemonCard/grass.png";
 import Loading from "../assets/imgs/loading_pokeball.gif";
 import Pokebola from "../assets/imgs/PokemonCard/Pokebola_Fundo.png";
+import { getColors } from "../utils/ReturnCardColor";
+import { getTypes } from "../utils/ReturnPokemonType";
 
 export const PokemonCard = ({ pokemon }) => {
   const [pkmn, isLoading, loaded, error] = useRequestData([], `${pokemon.url}`);
 
-  const pkmName = (name) => {
-    let pkm = name;
-    pkm = pkm.charAt(0).toUpperCase() + pkm.slice(1);
-    return pkm;
-  };
-
-  // console.log(pkm["sprites"]["other"]["official-artwork"]["front_default"]);
-
   return (
-    <Box
-      position={"relative"}
-      display={"flex"}
-      flexWrap={"wrap"}
-      w={"27.5rem"}
-      h={"13.125rem"}
-      borderRadius={"1rem"}
-      p={"1.5rem"}
-      backgroundImage={Pokebola}
-      backgroundRepeat={"no-repeat"}
-      backgroundPosition={"right"}
-      gap={"2rem"}
-      backgroundColor={"#729F92"}
-      mt={"2rem"}
-    >
+    <>
       {error ? (
-        <Flex align="center" justify="center" m="4rem">
+        <Flex align="center" justify="center">
           <Alert
             status="error"
             variant="subtle"
@@ -56,6 +35,7 @@ export const PokemonCard = ({ pokemon }) => {
             height="200px"
             bg="pokedex.red.300"
             maxWidth="lg"
+            borderRadius={"1rem"}
           >
             <AlertIcon boxSize="40px" mr={0} color="white" />
             <AlertTitle mt={4} mb={1} fontSize="lg">
@@ -67,50 +47,85 @@ export const PokemonCard = ({ pokemon }) => {
           </Alert>
         </Flex>
       ) : isLoading ? (
-        <Flex align="center" justify="center" m="4rem">
-          <Image src={Loading} alt="Animação da Pokébola carregando"></Image>
+        <Flex alignItems={"center"} justifyContent={"center"}>
+          <Image
+            src={Loading}
+            alt="Animação da Pokébola carregando"
+            mixBlendMode={"lighten"}
+            w={"50%"}
+          ></Image>
         </Flex>
       ) : loaded ? (
-        <>
-          <Box>
-            <Text>#{pkmn.id}</Text>
-            <Heading as="h1" fontSize={"2rem"}>
-              {pkmName(pkmn.name)}
+        <Box
+          position={"relative"}
+          display={"flex"}
+          flexWrap={"wrap"}
+          w={"27.5rem"}
+          h={"13.125rem"}
+          borderRadius={"1rem"}
+          backgroundImage={Pokebola}
+          backgroundRepeat={"no-repeat"}
+          backgroundPosition={"right"}
+          gap={"2rem"}
+          backgroundColor={getColors(pkmn.types[0].type.name)}
+          mt={"2rem"}
+        >
+          <Box px={"1.5rem"} pt={"1.5rem"}>
+            <Text fontWeight={"700"} fontSize={"1rem"} fontFamily={"Inter"}>
+              #{pkmn.id < 10 ? `0${pkmn.id}` : pkmn.id}
+            </Text>
+            <Heading
+              as="h1"
+              fontSize={"2rem"}
+              fontFamily={"Inter"}
+              fontWeight={"700"}
+            >
+              <Text textTransform="capitalize">{pkmn.name}</Text>
             </Heading>
             <Image
               src={
                 pkmn["sprites"]["other"]["official-artwork"]["front_default"]
               }
-              alt="Imagem do pokemon Bulbasaur"
+              alt={`Imagem do Pokémon ${pkmn.name}`}
               w={"12.063rem"}
               position={"absolute"}
-              right={"1rem"}
-              bottom={"4.2rem"}
+              right={"0.3rem"}
+              bottom={"4.5rem"}
             />
             <HStack mt={"0.4rem"}>
-              <Image
-                src={Poison}
-                alt="Imagem de Habilidade do Pokemon: Habilidade de Poison"
-              />
-              <Image
-                src={Grass}
-                alt="Imagem de Habilidade do Pokemon: Habilidade de Grass"
-              />
+              {pkmn.types.map((type) => {
+                return (
+                  <Image
+                    key={type.type.name}
+                    src={getTypes(type.type.name)}
+                    alt={`Imagem de Habilidade do Pokemon: Habilidade de ${type.type.name}`}
+                  />
+                );
+              })}
             </HStack>
           </Box>
           <Box
             display={"flex"}
             justifyContent={"space-between"}
             alignItems={"center"}
-            w={"24.6rem"}
+            w={"full"}
+            px={"1.5rem"}
+            pb={"1.5rem"}
           >
             <Button variant={"details"}>Detalhes</Button>
             <Button variant={"catch"}>Capturar!</Button>
           </Box>
-        </>
+        </Box>
       ) : (
-        <Text>Erro de requisição, tente novamente</Text>
+        <Flex alignItems={"center"} justifyContent={"center"}>
+          <Image
+            src={Loading}
+            alt="Animação da Pokébola carregando"
+            mixBlendMode={"lighten"}
+            w={"50%"}
+          ></Image>
+        </Flex>
       )}
-    </Box>
+    </>
   );
 };
