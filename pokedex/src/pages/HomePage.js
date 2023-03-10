@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 
-import useRequestData from "../hooks/useRequestData";
-import { BASE_URL } from "../constants/constants";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import Loading from "../assets/imgs/loading_pokeball.gif";
@@ -24,7 +21,6 @@ import {
 
 import {
   Pagination,
-  usePagination,
   PaginationPage,
   PaginationNext,
   PaginationPrevious,
@@ -33,52 +29,33 @@ import {
   PaginationSeparator,
 } from "@ajna/pagination";
 import { goToHomePage, goToNumberPage } from "../routes/coordinator";
+import { useContext, useEffect } from "react";
+import { GlobalContext } from "../contexts/GlobalContext";
 
 export const HomePage = () => {
   const params = useParams();
   const navigate = useNavigate();
 
-  const pokemonsTotal = 1020;
-  const [offset, setOffset] = useState(0);
-  const [pokemons, setPokemons] = useState([]);
-  const [pokeApi, isLoading, loaded, error] = useRequestData(
-    [],
-    `${BASE_URL}?offset=${0}&limit=${pokemonsTotal}`
-  );
-
-  const { pages, pagesCount, currentPage, setCurrentPage, pageSize } =
-    usePagination({
-      total: pokemonsTotal,
-      limits: {
-        outer: 1,
-        inner: 5,
-      },
-      initialState: {
-        pageSize: 20,
-        currentPage: 1,
-      },
-    });
-
-  const handlePageChange = (nextPage) => {
-    setCurrentPage(nextPage);
-  };
-
-  useEffect(() => {
-    if (loaded) {
-      setPokemons(pokeApi.results.slice(offset, pageSize));
-    }
-
-    if (offset > 0) {
-      setPokemons(pokeApi.results.slice(offset, offset + pageSize));
-    }
-  }, [loaded, offset, pageSize, pokeApi]);
+  const {
+    pokemons,
+    isLoading,
+    loaded,
+    error,
+    pages,
+    pagesCount,
+    currentPage,
+    setCurrentPage,
+    setOffset,
+    handlePageChange,
+    addToPokedex,
+  } = useContext(GlobalContext);
 
   useEffect(() => {
     if (params.pageNumber === undefined) {
       setCurrentPage(1);
       setOffset(0);
     } else {
-      setOffset((params.pageNumber - 1) * 20);
+      setOffset((params.pageNumber - 1) * 21);
     }
   }, [params.pageNumber, setCurrentPage]);
 
@@ -98,9 +75,9 @@ export const HomePage = () => {
           flexWrap={"wrap"}
           gap={"1.5rem"}
           w={"86rem"}
-          justifyContent={"center"}
+          justifyContent={"left"}
         >
-          <Heading as="h1" size="xl" mb={"2.5rem"} w={"full"}>
+          <Heading as="h1" size="xl" mb={"2rem"} w={"full"}>
             Todos os Pokémons
           </Heading>
 
@@ -113,11 +90,11 @@ export const HomePage = () => {
                 alignItems="center"
                 justifyContent="center"
                 textAlign="center"
-                height="200px"
+                height="12.5rem"
                 bg="pokedex.red.300"
                 maxWidth="lg"
               >
-                <AlertIcon boxSize="40px" mr={0} color="white" />
+                <AlertIcon boxSize="2.5rem" mr={0} color="white" />
                 <AlertTitle mt={4} mb={1} fontSize="lg">
                   Erro na requisição!
                 </AlertTitle>
@@ -137,7 +114,13 @@ export const HomePage = () => {
             </Flex>
           ) : loaded ? (
             pokemons.map((pokemon) => {
-              return <PokemonCard key={pokemon.url} pokemon={pokemon} />;
+              return (
+                <PokemonCard
+                  key={pokemon.url}
+                  pokemonUrl={pokemon.url}
+                  addToPokedex={addToPokedex}
+                />
+              );
             })
           ) : (
             <Text>Carregando, por favor aguarde.</Text>
