@@ -19,6 +19,10 @@ const theme = extendTheme({
       },
       yellow: {
         100: "#ffc400",
+        200: "#ffde69",
+      },
+      orange: {
+        100: "#ff7c2d",
       },
     },
   },
@@ -111,7 +115,8 @@ const theme = extendTheme({
         delete: {
           fontSize: "md",
           fontWeight: "400",
-          size: "3xs",
+          w: "9.125rem",
+          h: "2.375rem",
           bg: "pokedex.red.100",
           _hover: {
             bg: "pokedex.red.200",
@@ -149,6 +154,22 @@ const theme = extendTheme({
       defaultProps: {
         size: "1xs",
         variant: "default",
+      },
+    },
+    Progress: {
+      baseStyle: {
+        track: { bg: "transparent" },
+        filledTrack: {
+          bg: "pokedex.orange.100",
+        },
+        borderRadius: "3px",
+      },
+      variants: {
+        yellow: {
+          filledTrack: {
+            bg: "pokedex.yellow.200",
+          },
+        },
       },
     },
   },

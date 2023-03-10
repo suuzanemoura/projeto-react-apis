@@ -17,9 +17,20 @@ import Loading from "../assets/imgs/loading_pokeball.gif";
 import Pokebola from "../assets/imgs/PokemonCard/Pokebola_Fundo.png";
 import { getColors } from "../utils/ReturnCardColor";
 import { getTypes } from "../utils/ReturnPokemonType";
+import { useLocation, useNavigate } from "react-router-dom";
+import { goToPokemonDetailsPage } from "../routes/coordinator";
 
-export const PokemonCard = ({ pokemon }) => {
-  const [pkmn, isLoading, loaded, error] = useRequestData([], `${pokemon.url}`);
+export const PokemonCard = ({
+  pokemonUrl,
+  addToPokedex,
+  removeFromPokedex,
+}) => {
+  const [pokemon, isLoading, loaded, error] = useRequestData(
+    [],
+    `${pokemonUrl}`
+  );
+  const location = useLocation();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -32,12 +43,12 @@ export const PokemonCard = ({ pokemon }) => {
             alignItems="center"
             justifyContent="center"
             textAlign="center"
-            height="200px"
+            height="12.5rem"
             bg="pokedex.red.300"
             maxWidth="lg"
             borderRadius={"1rem"}
           >
-            <AlertIcon boxSize="40px" mr={0} color="white" />
+            <AlertIcon boxSize="2.5rem" mr={0} color="white" />
             <AlertTitle mt={4} mb={1} fontSize="lg">
               Erro na requisição!
             </AlertTitle>
@@ -67,33 +78,34 @@ export const PokemonCard = ({ pokemon }) => {
           backgroundRepeat={"no-repeat"}
           backgroundPosition={"right"}
           gap={"2rem"}
-          backgroundColor={getColors(pkmn.types[0].type.name)}
+          backgroundColor={getColors(pokemon.types[0].type.name)}
           mt={"2rem"}
         >
           <Box px={"1.5rem"} pt={"1.5rem"}>
             <Text fontWeight={"700"} fontSize={"1rem"} fontFamily={"Inter"}>
-              #{pkmn.id < 10 ? `0${pkmn.id}` : pkmn.id}
+              #{pokemon.id < 10 ? `0${pokemon.id}` : pokemon.id}
             </Text>
             <Heading
               as="h1"
               fontSize={"2rem"}
               fontFamily={"Inter"}
               fontWeight={"700"}
+              textTransform="capitalize"
             >
-              <Text textTransform="capitalize">{pkmn.name}</Text>
+              {pokemon.name}
             </Heading>
             <Image
               src={
-                pkmn["sprites"]["other"]["official-artwork"]["front_default"]
+                pokemon["sprites"]["other"]["official-artwork"]["front_default"]
               }
-              alt={`Imagem do Pokémon ${pkmn.name}`}
+              alt={`Imagem do Pokémon ${pokemon.name}`}
               w={"12.063rem"}
               position={"absolute"}
               right={"0.3rem"}
               bottom={"4.5rem"}
             />
             <HStack mt={"0.4rem"}>
-              {pkmn.types.map((type) => {
+              {pokemon.types.map((type) => {
                 return (
                   <Image
                     key={type.type.name}
@@ -112,8 +124,24 @@ export const PokemonCard = ({ pokemon }) => {
             px={"1.5rem"}
             pb={"1.5rem"}
           >
-            <Button variant={"details"}>Detalhes</Button>
-            <Button variant={"catch"}>Capturar!</Button>
+            <Button
+              variant={"details"}
+              onClick={() => goToPokemonDetailsPage(navigate, pokemon.name)}
+            >
+              Detalhes
+            </Button>
+            {location.pathname === "/pokedex" ? (
+              <Button
+                variant={"delete"}
+                onClick={() => removeFromPokedex(pokemon)}
+              >
+                Excluir
+              </Button>
+            ) : (
+              <Button variant={"catch"} onClick={() => addToPokedex(pokemon)}>
+                Capturar!
+              </Button>
+            )}
           </Box>
         </Box>
       ) : (
