@@ -11,6 +11,8 @@ import {
   Heading,
   HStack,
   Image,
+  List,
+  ListItem,
   Progress,
   Text,
 } from "@chakra-ui/react";
@@ -63,7 +65,7 @@ export const PokemonDetailsPage = () => {
             Detalhes
           </Heading>
           {error ? (
-            <Flex align="center" justify="center">
+            <Flex align="top" justify="center" w="100%">
               <Alert
                 status="error"
                 variant="subtle"
@@ -86,12 +88,12 @@ export const PokemonDetailsPage = () => {
               </Alert>
             </Flex>
           ) : isLoading ? (
-            <Flex alignItems={"center"} justifyContent={"center"}>
+            <Flex alignItems={"center"} justifyContent={"center"} w={"100%"}>
               <Image
                 src={Loading}
                 alt="Animação da Pokébola carregando"
                 mixBlendMode={"lighten"}
-                w={"50%"}
+                w={"30%"}
               ></Image>
             </Flex>
           ) : loaded ? (
@@ -134,7 +136,7 @@ export const PokemonDetailsPage = () => {
                         "black-white"
                       ]["animated"]["front_default"]
                     }
-                    alt={`Imagem do Pokémon ${pokemon.name}`}
+                    alt={`Gif frontal do Pokémon ${pokemon.name}`}
                     w={"6.25rem"}
                   />
                 </Box>
@@ -153,7 +155,7 @@ export const PokemonDetailsPage = () => {
                         "black-white"
                       ]["animated"]["back_default"]
                     }
-                    alt={`Imagem do Pokémon ${pokemon.name}`}
+                    alt={`Gif das costas do Pokémon ${pokemon.name}`}
                     w={"6.25rem"}
                   />
                 </Box>
@@ -439,7 +441,87 @@ export const PokemonDetailsPage = () => {
                   gridRow={2}
                   bg={"white"}
                   borderRadius={"1rem"}
-                ></Box>
+                  color={"black"}
+                  p={"1.125rem"}
+                >
+                  <Heading
+                    as="h2"
+                    fontSize={"2xl"}
+                    fontWeight={"800"}
+                    fontFamily={"Inter, sans serif"}
+                    mb={"1.25rem"}
+                  >
+                    Moves:
+                  </Heading>
+                  <List
+                    display={"flex"}
+                    flexDirection={"column"}
+                    gap={"1rem"}
+                    textTransform={"capitalize"}
+                    fontSize={"14px"}
+                  >
+                    <ListItem
+                      bgColor={"#ECECEC"}
+                      p={"0.625rem"}
+                      borderRadius={"0.75rem"}
+                      border={"1px dashed rgba(0, 0, 0, 0.14)"}
+                      borderWidth={"0.1rem"}
+                      w={"max-content"}
+                    >
+                      {pokemon.moves[0].move.name.replace("-", " ")}
+                    </ListItem>
+                    <ListItem
+                      bgColor={"#ECECEC"}
+                      p={"0.625rem"}
+                      borderRadius={"0.75rem"}
+                      border={"1px dashed rgba(0, 0, 0, 0.14)"}
+                      borderWidth={"0.1rem"}
+                      w={"max-content"}
+                    >
+                      {pokemon.moves[1].move.name.replace("-", " ")}
+                    </ListItem>
+                    <ListItem
+                      bgColor={"#ECECEC"}
+                      p={"0.625rem"}
+                      borderRadius={"0.75rem"}
+                      border={"1px dashed rgba(0, 0, 0, 0.14)"}
+                      borderWidth={"0.1rem"}
+                      w={"max-content"}
+                    >
+                      {pokemon.moves[2].move.name.replace("-", " ")}
+                    </ListItem>
+                    <ListItem
+                      bgColor={"#ECECEC"}
+                      p={"0.625rem"}
+                      borderRadius={"0.75rem"}
+                      border={"1px dashed rgba(0, 0, 0, 0.14)"}
+                      borderWidth={"0.1rem"}
+                      w={"max-content"}
+                    >
+                      {pokemon.moves[3].move.name.replace("-", " ")}
+                    </ListItem>
+                    <ListItem
+                      bgColor={"#ECECEC"}
+                      p={"0.625rem"}
+                      borderRadius={"0.75rem"}
+                      border={"1px dashed rgba(0, 0, 0, 0.14)"}
+                      borderWidth={"0.1rem"}
+                      w={"max-content"}
+                    >
+                      {pokemon.moves[4].move.name.replace("-", " ")}
+                    </ListItem>
+                    <ListItem
+                      bgColor={"#ECECEC"}
+                      p={"0.625rem"}
+                      borderRadius={"0.75rem"}
+                      border={"1px dashed rgba(0, 0, 0, 0.14)"}
+                      borderWidth={"0.1rem"}
+                      w={"max-content"}
+                    >
+                      {pokemon.moves[5].move.name.replace("-", " ")}
+                    </ListItem>
+                  </List>
+                </Box>
                 <Image
                   gridColumn={2}
                   gridRow={1}
