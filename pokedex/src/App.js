@@ -7,13 +7,16 @@ import "@fontsource/inter/700.css";
 import "@fontsource/inter/800.css";
 import theme from "./theme/theme";
 import { GlobalContextProvider } from "./contexts/GlobalContext";
+import { PokedexContextProvider } from "./contexts/PokedexContext";
 
 function App() {
   return (
     <GlobalContextProvider>
-      <ChakraProvider resetCSS theme={theme}>
-        <Router />
-      </ChakraProvider>
+      <PokedexContextProvider>
+        <ChakraProvider resetCSS theme={theme}>
+          <Router />
+        </ChakraProvider>
+      </PokedexContextProvider>
     </GlobalContextProvider>
   );
 }

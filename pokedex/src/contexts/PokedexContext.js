@@ -1,0 +1,55 @@
+import { usePagination } from "@ajna/pagination";
+import { createContext, useContext, useState } from "react";
+import { GlobalContext } from "./GlobalContext";
+
+export const PokedexContext = createContext();
+
+export function PokedexContextProvider({ children }) {
+  const [offset, setOffset] = useState(0);
+  const { pokedex } = useContext(GlobalContext);
+  const { pages, pagesCount, currentPage, setCurrentPage, pageSize } =
+    usePagination({
+      total: pokedex.length,
+      limits: {
+        outer: 1,
+        inner: 5,
+      },
+      initialState: {
+        pageSize: 21,
+        currentPage: 1,
+      },
+    });
+
+  const handlePageChange = (nextPage) => {
+    setCurrentPage(nextPage);
+  };
+
+  const filteredPokedex = () => {
+    let pokeList = [...pokedex];
+    pokeList = pokeList.slice(offset, pageSize);
+    return pokeList;
+  };
+  const filteredPokedexPage = () => {
+    let pokeList = [...pokedex];
+    pokeList = pokeList.slice(offset, offset + pageSize);
+    return pokeList;
+  };
+
+  return (
+    <PokedexContext.Provider
+      value={{
+        pages,
+        pagesCount,
+        currentPage,
+        setCurrentPage,
+        handlePageChange,
+        offset,
+        setOffset,
+        filteredPokedex,
+        filteredPokedexPage,
+      }}
+    >
+      {children}
+    </PokedexContext.Provider>
+  );
+}

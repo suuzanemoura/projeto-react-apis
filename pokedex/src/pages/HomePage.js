@@ -59,6 +59,12 @@ export const HomePage = () => {
     }
   }, [params.pageNumber, setCurrentPage, setOffset]);
 
+  useEffect(() => {
+    if (params.pageNumber > 1) {
+      setCurrentPage(params.pageNumber);
+    }
+  }, []);
+
   return (
     <Flex direction="column" flex="1">
       <Header />
