@@ -10,6 +10,7 @@ import {
   HStack,
   Image,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 
 import useRequestData from "../hooks/useRequestData";
@@ -19,6 +20,7 @@ import { getColors } from "../utils/ReturnCardColor";
 import { getTypes } from "../utils/ReturnPokemonType";
 import { useLocation, useNavigate } from "react-router-dom";
 import { goToPokemonDetailsPage } from "../routes/coordinator";
+import { PokemonModal } from "./Modal";
 
 export const PokemonCard = ({
   pokemonUrl,
@@ -31,6 +33,17 @@ export const PokemonCard = ({
   );
   const location = useLocation();
   const navigate = useNavigate();
+  const { isOpen, onClose, onOpen } = useDisclosure();
+
+  const addModal = () => {
+    onClose();
+    addToPokedex(pokemon);
+  };
+
+  const deleteModal = () => {
+    onClose();
+    removeFromPokedex(pokemon);
+  };
 
   return (
     <>
@@ -131,16 +144,39 @@ export const PokemonCard = ({
               Detalhes
             </Button>
             {location.pathname === "/pokedex" ? (
-              <Button
-                variant={"delete"}
-                onClick={() => removeFromPokedex(pokemon)}
-              >
-                Excluir
-              </Button>
+              <>
+                <Button
+                  variant={"delete"}
+                  onClick={() => {
+                    onOpen();
+                  }}
+                >
+                  Excluir
+                </Button>
+                <PokemonModal
+                  isOpen={isOpen}
+                  onClose={deleteModal}
+                  title={"Oh, no!"}
+                  body={"O Pokémon foi removido da sua Pokedéx"}
+                />
+              </>
             ) : (
-              <Button variant={"catch"} onClick={() => addToPokedex(pokemon)}>
-                Capturar!
-              </Button>
+              <>
+                <Button
+                  variant={"catch"}
+                  onClick={() => {
+                    onOpen();
+                  }}
+                >
+                  Capturar!
+                </Button>
+                <PokemonModal
+                  isOpen={isOpen}
+                  onClose={addModal}
+                  title={"Gotcha!"}
+                  body={"O Pokémon foi adicionado a sua Pokédex"}
+                />
+              </>
             )}
           </Box>
         </Box>
