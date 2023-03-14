@@ -110,7 +110,7 @@ export const PokemonCard = ({
                   <Image
                     key={type.type.name}
                     src={getTypes(type.type.name)}
-                    alt={`Imagem de Habilidade do Pokemon: Habilidade de ${type.type.name}`}
+                    alt={`Imagem do tipo do Pokemon: tipo de ${type.type.name}`}
                   />
                 );
               })}

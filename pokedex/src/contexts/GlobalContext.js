@@ -10,7 +10,9 @@ export function GlobalContextProvider({ children }) {
 
   const [offset, setOffset] = useState(0);
   const [pokemons, setPokemons] = useState([]);
-  const [pokedex, setPokedex] = useState([]);
+  const [pokedex, setPokedex] = useState(
+    JSON.parse(localStorage.getItem("pokemons")) || []
+  );
 
   const [pokeList, isLoading, loaded, error] = useRequestData(
     [],
@@ -33,22 +35,16 @@ export function GlobalContextProvider({ children }) {
   const handlePageChange = (nextPage) => {
     setCurrentPage(nextPage);
   };
-  const addToPokedex = (pokemonToAdd) => {
-    const isAlreadyOnPokedex = pokedex.find(
-      (pokemonInPokedex) => pokemonInPokedex.name === pokemonToAdd.name
-    );
 
-    if (!isAlreadyOnPokedex) {
-      const newPokedex = [...pokedex, pokemonToAdd];
-      setPokedex(newPokedex);
-    }
+  const addToPokedex = (pokemonToAdd) => {
+    const newPokedex = [...pokedex, pokemonToAdd];
+    setPokedex(newPokedex);
   };
 
   const removeFromPokedex = (pokemonToRemove) => {
     const newPokedex = pokedex.filter(
       (pokemonInPokedex) => pokemonInPokedex.name !== pokemonToRemove.name
     );
-
     setPokedex(newPokedex);
   };
 
@@ -82,6 +78,10 @@ export function GlobalContextProvider({ children }) {
       setPokemons(filteredPokelist());
     }
   }, [loaded, offset, pokedex]);
+
+  useEffect(() => {
+    localStorage.setItem("pokemons", JSON.stringify(pokedex));
+  }, [pokedex]);
 
   return (
     <GlobalContext.Provider
