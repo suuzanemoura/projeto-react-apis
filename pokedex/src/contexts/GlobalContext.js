@@ -42,7 +42,7 @@ export function GlobalContextProvider({ children }) {
 
   const removeFromPokedex = (pokemonToRemove) => {
     const newPokedex = pokedex.filter(
-      (pokemonInPokedex) => pokemonInPokedex.name !== pokemonToRemove.name
+      (pokemonInPokedex) => pokemonInPokedex !== pokemonToRemove
     );
     setPokedex(newPokedex);
   };
@@ -51,9 +51,7 @@ export function GlobalContextProvider({ children }) {
     return pokeList.results
       .filter(
         (pokemon) =>
-          !pokedex.find(
-            (pokemonInPokedex) => pokemon.name === pokemonInPokedex.name
-          )
+          !pokedex.find((pokemonInPokedex) => pokemon.name === pokemonInPokedex)
       )
       .slice(offset, pageSize);
   };
@@ -61,9 +59,7 @@ export function GlobalContextProvider({ children }) {
     return pokeList.results
       .filter(
         (pokemon) =>
-          !pokedex.find(
-            (pokemonInPokedex) => pokemon.name === pokemonInPokedex.name
-          )
+          !pokedex.find((pokemonInPokedex) => pokemon.name === pokemonInPokedex)
       )
       .slice(offset, offset + pageSize);
   };

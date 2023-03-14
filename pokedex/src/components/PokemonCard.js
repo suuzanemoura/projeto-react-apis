@@ -18,9 +18,11 @@ import Loading from "../assets/imgs/loading_pokeball.gif";
 import Pokebola from "../assets/imgs/PokemonCard/Pokebola_Fundo.png";
 import { getColors } from "../utils/ReturnCardColor";
 import { getTypes } from "../utils/ReturnPokemonType";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { goToPokemonDetailsPage } from "../routes/coordinator";
 import { PokemonModal } from "./Modal";
+import { GlobalContext } from "../contexts/GlobalContext";
+import { useContext } from "react";
 
 export const PokemonCard = ({
   pokemonUrl,
@@ -31,18 +33,19 @@ export const PokemonCard = ({
     [],
     `${pokemonUrl}`
   );
-  const location = useLocation();
+
   const navigate = useNavigate();
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const { pokedex } = useContext(GlobalContext);
 
   const addModal = () => {
     onClose();
-    addToPokedex(pokemon);
+    addToPokedex(pokemon.name);
   };
 
   const deleteModal = () => {
     onClose();
-    removeFromPokedex(pokemon);
+    removeFromPokedex(pokemon.name);
   };
 
   return (
@@ -143,7 +146,9 @@ export const PokemonCard = ({
             >
               Detalhes
             </Button>
-            {location.pathname === "/pokedex" ? (
+            {pokedex.find(
+              (pokemonInPokedex) => pokemon.name === pokemonInPokedex
+            ) ? (
               <>
                 <Button
                   variant={"delete"}

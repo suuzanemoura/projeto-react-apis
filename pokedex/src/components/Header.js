@@ -68,6 +68,19 @@ export const Header = ({ pokemon }) => {
             </Box>
           </>
         );
+      case `/pokedex/${params.pokedexPage}`:
+        return (
+          <>
+            <Box display="flex" justifyContent="start" gridColumn={1}>
+              <Button variant="link" onClick={() => goToHomePage(navigate)}>
+                <ChevronLeftIcon w={25} h={25} /> Todos Pokémons
+              </Button>
+            </Box>
+            <Box display="flex" justifyContent="center" gridColumn={2}>
+              <Image src={Logo} alt="Logo do Pokémon" minW={"8rem"} />
+            </Box>
+          </>
+        );
       case `/pokemon/${params.pokemon}`:
         return (
           <>
