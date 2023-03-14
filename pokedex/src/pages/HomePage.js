@@ -57,7 +57,7 @@ export const HomePage = () => {
     } else {
       setOffset((params.pageNumber - 1) * 21);
     }
-  }, [params.pageNumber, setCurrentPage]);
+  }, [params.pageNumber, setCurrentPage, setOffset]);
 
   return (
     <Flex direction="column" flex="1">

@@ -7,7 +7,6 @@ export const GlobalContext = createContext();
 
 export function GlobalContextProvider({ children }) {
   const pokemonsTotal = 1008;
-
   const [offset, setOffset] = useState(0);
   const [pokemons, setPokemons] = useState([]);
   const [pokedex, setPokedex] = useState(

@@ -34,11 +34,12 @@ export const PokedexPage = () => {
             Meus Pokémons
           </Heading>
           <Flex
-            justifyContent={"center"}
+            justifyContent={pokedex.length === 0 ? "center" : "left"}
             alignItems={"center"}
             w={"full"}
-            direction={"column"}
-            gap={"2rem"}
+            direction={pokedex.length === 0 ? "column" : "row"}
+            gap={"1.5rem"}
+            wrap={"wrap"}
           >
             {pokedex.length === 0 ? (
               <>
