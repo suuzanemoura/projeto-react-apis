@@ -1,10 +1,11 @@
-import { Box, Flex, Heading } from "@chakra-ui/react";
+import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { useContext } from "react";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { PokemonCard } from "../components/PokemonCard";
 import { BASE_URL } from "../constants/constants";
 import { GlobalContext } from "../contexts/GlobalContext";
+import Pokebola from "../assets/imgs/PokedexVazia.png";
 
 export const PokedexPage = () => {
   const { pokedex, removeFromPokedex } = useContext(GlobalContext);
@@ -32,15 +33,37 @@ export const PokedexPage = () => {
           <Heading as="h1" size="xl" mb={"2rem"} w={"full"}>
             Meus Pokémons
           </Heading>
-          {pokedex.map((pokemon) => {
-            return (
-              <PokemonCard
-                key={pokemon.name}
-                pokemonUrl={`${BASE_URL}${pokemon.name}`}
-                removeFromPokedex={removeFromPokedex}
-              />
-            );
-          })}
+          <Flex
+            justifyContent={"center"}
+            alignItems={"center"}
+            w={"full"}
+            direction={"column"}
+            gap={"2rem"}
+          >
+            {pokedex.length === 0 ? (
+              <>
+                <Image
+                  src={Pokebola}
+                  alt={"Pokedex vazia."}
+                  w={"20rem"}
+                  objectFit={"contain"}
+                />
+                <Text>Pokedex vazia! Capture seus pokémons favoritos.</Text>
+              </>
+            ) : (
+              <>
+                {pokedex.map((pokemon) => {
+                  return (
+                    <PokemonCard
+                      key={pokemon.name}
+                      pokemonUrl={`${BASE_URL}${pokemon.name}`}
+                      removeFromPokedex={removeFromPokedex}
+                    />
+                  );
+                })}
+              </>
+            )}
+          </Flex>
         </Box>
       </Box>
       <Footer />
