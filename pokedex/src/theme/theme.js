@@ -67,10 +67,10 @@ const theme = extendTheme({
           color: "black",
           textDecoration: "underline",
           _hover: {
-            color: "pokedex.bluedark",
+            color: "pokedex.blue.300",
           },
           _active: {
-            color: "pokedex.bluedarker",
+            color: "pokedex.blue.200",
           },
         },
         addPokedex: {
@@ -105,7 +105,7 @@ const theme = extendTheme({
           bg: "white",
           color: "black",
           _hover: {
-            transform: " scale(1.2) translateY(-5px) translateX(-5px)",
+            transform: "scale(1.2) translateY(-5px) translateX(-10px)",
             boxShadow: "2px 2px 20px 1px rgba(0, 0, 0, 0.1)",
           },
           _active: {
@@ -132,7 +132,7 @@ const theme = extendTheme({
           h: "1.5rem",
           textDecoration: "underline",
           _hover: {
-            transform: " scale(1.2) translateY(-5px) translateX(5px)",
+            transform: "scale(1.2) translateX(5px)",
           },
           _active: {
             color: "pokedex.blue.300",
@@ -162,12 +162,21 @@ const theme = extendTheme({
         filledTrack: {
           bg: "pokedex.orange.100",
         },
-        borderRadius: "3px",
       },
       variants: {
+        orange: {
+          filledTrack: {
+            bg: "pokedex.orange.100",
+          },
+        },
         yellow: {
           filledTrack: {
             bg: "pokedex.yellow.200",
+          },
+        },
+        blue: {
+          filledTrack: {
+            bg: "pokedex.blue.300",
           },
         },
       },
