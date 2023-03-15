@@ -7,13 +7,11 @@ import {
   Card,
   Flex,
   Grid,
-  GridItem,
   Heading,
   HStack,
   Image,
   List,
   ListItem,
-  Progress,
   Text,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
@@ -27,16 +25,28 @@ import Pokebola from "../assets/imgs/Pokebola_DetailsPage_Fundo.png";
 import PokebolaCard from "../assets/imgs/Pokebola_DetailsPage_FundoCard.png";
 import { getColors } from "../utils/ReturnCardColor";
 import { getTypes } from "../utils/ReturnPokemonType";
+import { BaseStatBar } from "../components/BaseStatBar";
 
 export const PokemonDetailsPage = () => {
   const params = useParams();
-
   const [pokemon, isLoading, loaded, error] = useRequestData(
     [],
     `${BASE_URL}${params.pokemon}`
   );
 
-  console.log(pokemon);
+  const getMoves = () => {
+    let moves = [];
+    if (pokemon.moves.length > 5) {
+      for (let i = 0; i < 6; i++) {
+        moves.push(pokemon.moves[i].move.name.replace("-", " "));
+      }
+    } else {
+      for (let i = 0; i < pokemon.moves.length; i++) {
+        moves.push(pokemon.moves[i].move.name.replace("-", " "));
+      }
+    }
+    return moves;
+  };
 
   return (
     <Flex direction="column" flex="1">
@@ -180,221 +190,16 @@ export const PokemonDetailsPage = () => {
                     templateRows={"repeat(8, 1fr)"}
                     fontFamily={"Inter, sans serif"}
                   >
-                    <GridItem row={1}>
-                      <Box
-                        display={"grid"}
-                        gridTemplateColumns={"3.75rem 2.125rem 1fr"}
-                        alignItems={"center"}
-                        w={"100%"}
-                        h={"28px"}
-                        gap={"1rem"}
-                        borderTop={"1px solid RGBA(0, 0, 0, 0.06)"}
-                      >
-                        <Text
-                          fontSize={"14px"}
-                          col={1}
-                          justifySelf={"right"}
-                          color={"RGBA(0, 0, 0, 0.48)"}
-                        >
-                          HP
-                        </Text>
-                        <Text fontSize={"14px"} col={2} justifySelf={"center"}>
-                          {pokemon.stats[0]["base_stat"]}
-                        </Text>
-                        <Box justifySelf={"left"} w={"100%"}>
-                          <Progress
-                            value={pokemon.stats[0]["base_stat"]}
-                            borderRadius={"3px"}
-                            col={3}
-                          />
-                        </Box>
-                      </Box>
-                    </GridItem>
-                    <GridItem row={2}>
-                      <Box
-                        display={"grid"}
-                        gridTemplateColumns={"3.75rem 2.125rem 1fr"}
-                        alignItems={"center"}
-                        w={"100%"}
-                        h={"28px"}
-                        gap={"1rem"}
-                        borderTop={"1px solid RGBA(0, 0, 0, 0.06)"}
-                      >
-                        <Text
-                          fontSize={"14px"}
-                          col={1}
-                          justifySelf={"right"}
-                          color={"RGBA(0, 0, 0, 0.48)"}
-                        >
-                          Attack
-                        </Text>
-                        <Text fontSize={"14px"} col={2} justifySelf={"center"}>
-                          {pokemon.stats[1]["base_stat"]}
-                        </Text>
-                        <Box justifySelf={"left"} w={"100%"}>
-                          <Progress
-                            value={pokemon.stats[1]["base_stat"]}
-                            borderRadius={"3px"}
-                            col={3}
-                          />
-                        </Box>
-                      </Box>
-                    </GridItem>
-                    <GridItem row={3}>
-                      <Box
-                        display={"grid"}
-                        gridTemplateColumns={"3.75rem 2.125rem 1fr"}
-                        alignItems={"center"}
-                        w={"100%"}
-                        h={"28px"}
-                        gap={"1rem"}
-                        borderTop={"1px solid RGBA(0, 0, 0, 0.06)"}
-                      >
-                        <Text
-                          fontSize={"14px"}
-                          col={1}
-                          justifySelf={"right"}
-                          color={"RGBA(0, 0, 0, 0.48)"}
-                        >
-                          Defense
-                        </Text>
-                        <Text fontSize={"14px"} col={2} justifySelf={"center"}>
-                          {pokemon.stats[2]["base_stat"]}
-                        </Text>
-                        <Box justifySelf={"left"} w={"100%"}>
-                          <Progress
-                            value={pokemon.stats[2]["base_stat"]}
-                            borderRadius={"3px"}
-                            col={3}
-                          />
-                        </Box>
-                      </Box>
-                    </GridItem>
-                    <GridItem row={4}>
-                      <Box
-                        display={"grid"}
-                        gridTemplateColumns={"3.75rem 2.125rem 1fr"}
-                        alignItems={"center"}
-                        w={"100%"}
-                        h={"28px"}
-                        gap={"1rem"}
-                        borderTop={"1px solid RGBA(0, 0, 0, 0.06)"}
-                      >
-                        <Text
-                          fontSize={"14px"}
-                          col={1}
-                          justifySelf={"right"}
-                          color={"RGBA(0, 0, 0, 0.48)"}
-                        >
-                          Sp. Atk
-                        </Text>
-                        <Text fontSize={"14px"} col={2} justifySelf={"center"}>
-                          {pokemon.stats[3]["base_stat"]}
-                        </Text>
-                        <Box justifySelf={"left"} w={"100%"}>
-                          <Progress
-                            value={pokemon.stats[3]["base_stat"]}
-                            borderRadius={"3px"}
-                            col={3}
-                            variant={"yellow"}
-                          />
-                        </Box>
-                      </Box>
-                    </GridItem>
-                    <GridItem row={5}>
-                      <Box
-                        display={"grid"}
-                        gridTemplateColumns={"3.75rem 2.125rem 1fr"}
-                        alignItems={"center"}
-                        w={"100%"}
-                        h={"28px"}
-                        gap={"1rem"}
-                        borderTop={"1px solid RGBA(0, 0, 0, 0.06)"}
-                      >
-                        <Text
-                          fontSize={"14px"}
-                          col={1}
-                          justifySelf={"right"}
-                          color={"RGBA(0, 0, 0, 0.48)"}
-                        >
-                          Sp. Def
-                        </Text>
-                        <Text fontSize={"14px"} col={2} justifySelf={"center"}>
-                          {pokemon.stats[4]["base_stat"]}
-                        </Text>
-                        <Box justifySelf={"left"} w={"100%"}>
-                          <Progress
-                            value={pokemon.stats[4]["base_stat"]}
-                            borderRadius={"3px"}
-                            col={3}
-                            variant={"yellow"}
-                          />
-                        </Box>
-                      </Box>
-                    </GridItem>
-                    <GridItem row={6}>
-                      <Box
-                        display={"grid"}
-                        gridTemplateColumns={"3.75rem 2.125rem 1fr"}
-                        alignItems={"center"}
-                        w={"100%"}
-                        h={"28px"}
-                        gap={"1rem"}
-                        borderTop={"1px solid RGBA(0, 0, 0, 0.06)"}
-                      >
-                        <Text
-                          fontSize={"14px"}
-                          col={1}
-                          justifySelf={"right"}
-                          color={"RGBA(0, 0, 0, 0.48)"}
-                        >
-                          Speed
-                        </Text>
-                        <Text fontSize={"14px"} col={2} justifySelf={"center"}>
-                          {pokemon.stats[5]["base_stat"]}
-                        </Text>
-                        <Box justifySelf={"left"} w={"100%"}>
-                          <Progress
-                            value={pokemon.stats[5]["base_stat"]}
-                            borderRadius={"3px"}
-                            col={3}
-                          />
-                        </Box>
-                      </Box>
-                    </GridItem>
-                    <GridItem row={7}>
-                      <Box
-                        display={"grid"}
-                        gridTemplateColumns={"3.75rem 2.125rem 1fr"}
-                        alignItems={"center"}
-                        w={"100%"}
-                        h={"28px"}
-                        gap={"1rem"}
-                        borderY={"1px solid RGBA(0, 0, 0, 0.06)"}
-                      >
-                        <Text
-                          fontSize={"14px"}
-                          col={1}
-                          justifySelf={"right"}
-                          color={"RGBA(0, 0, 0, 0.48)"}
-                        >
-                          Total
-                        </Text>
-                        <Text
-                          fontSize={"14px"}
-                          col={2}
-                          justifySelf={"center"}
-                          fontWeight={"700"}
-                        >
-                          {pokemon.stats[0]["base_stat"] +
-                            pokemon.stats[1]["base_stat"] +
-                            pokemon.stats[2]["base_stat"] +
-                            pokemon.stats[3]["base_stat"] +
-                            pokemon.stats[4]["base_stat"] +
-                            pokemon.stats[5]["base_stat"]}
-                        </Text>
-                      </Box>
-                    </GridItem>
+                    {pokemon.stats.map((stat) => {
+                      return (
+                        <BaseStatBar
+                          key={stat.stat.name}
+                          name={stat.stat.name}
+                          value={stat.base_stat}
+                        />
+                      );
+                    })}
+                    <BaseStatBar name={"total"} stats={pokemon.stats} />
                   </Grid>
                 </Box>
               </Box>
@@ -460,66 +265,21 @@ export const PokemonDetailsPage = () => {
                     textTransform={"capitalize"}
                     fontSize={"14px"}
                   >
-                    <ListItem
-                      bgColor={"#ECECEC"}
-                      p={"0.625rem"}
-                      borderRadius={"0.75rem"}
-                      border={"1px dashed rgba(0, 0, 0, 0.14)"}
-                      borderWidth={"0.1rem"}
-                      w={"max-content"}
-                    >
-                      {pokemon.moves[0].move.name.replace("-", " ")}
-                    </ListItem>
-                    <ListItem
-                      bgColor={"#ECECEC"}
-                      p={"0.625rem"}
-                      borderRadius={"0.75rem"}
-                      border={"1px dashed rgba(0, 0, 0, 0.14)"}
-                      borderWidth={"0.1rem"}
-                      w={"max-content"}
-                    >
-                      {pokemon.moves[1].move.name.replace("-", " ")}
-                    </ListItem>
-                    <ListItem
-                      bgColor={"#ECECEC"}
-                      p={"0.625rem"}
-                      borderRadius={"0.75rem"}
-                      border={"1px dashed rgba(0, 0, 0, 0.14)"}
-                      borderWidth={"0.1rem"}
-                      w={"max-content"}
-                    >
-                      {pokemon.moves[2].move.name.replace("-", " ")}
-                    </ListItem>
-                    <ListItem
-                      bgColor={"#ECECEC"}
-                      p={"0.625rem"}
-                      borderRadius={"0.75rem"}
-                      border={"1px dashed rgba(0, 0, 0, 0.14)"}
-                      borderWidth={"0.1rem"}
-                      w={"max-content"}
-                    >
-                      {pokemon.moves[3].move.name.replace("-", " ")}
-                    </ListItem>
-                    <ListItem
-                      bgColor={"#ECECEC"}
-                      p={"0.625rem"}
-                      borderRadius={"0.75rem"}
-                      border={"1px dashed rgba(0, 0, 0, 0.14)"}
-                      borderWidth={"0.1rem"}
-                      w={"max-content"}
-                    >
-                      {pokemon.moves[4].move.name.replace("-", " ")}
-                    </ListItem>
-                    <ListItem
-                      bgColor={"#ECECEC"}
-                      p={"0.625rem"}
-                      borderRadius={"0.75rem"}
-                      border={"1px dashed rgba(0, 0, 0, 0.14)"}
-                      borderWidth={"0.1rem"}
-                      w={"max-content"}
-                    >
-                      {pokemon.moves[5].move.name.replace("-", " ")}
-                    </ListItem>
+                    {getMoves().map((move) => {
+                      return (
+                        <ListItem
+                          key={move}
+                          bgColor={"#ECECEC"}
+                          p={"0.625rem"}
+                          borderRadius={"0.75rem"}
+                          border={"1px dashed rgba(0, 0, 0, 0.14)"}
+                          borderWidth={"0.1rem"}
+                          w={"max-content"}
+                        >
+                          {move}
+                        </ListItem>
+                      );
+                    })}
                   </List>
                 </Box>
                 <Image
