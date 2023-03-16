@@ -23,10 +23,10 @@ export function GlobalContextProvider({ children }) {
       total: pokemonsTotal - pokedex.length,
       limits: {
         outer: 1,
-        inner: 5,
+        inner: 1,
       },
       initialState: {
-        pageSize: 21,
+        pageSize: 24,
         currentPage: 1,
       },
     });

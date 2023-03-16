@@ -87,17 +87,17 @@ export const PokemonCard = ({
           position={"relative"}
           display={"flex"}
           flexWrap={"wrap"}
-          w={"27.5rem"}
+          w={["16rem", "26.5rem", "27.5rem"]}
           h={"13.125rem"}
           borderRadius={"1rem"}
           backgroundImage={Pokebola}
           backgroundRepeat={"no-repeat"}
           backgroundPosition={"right"}
-          gap={"2rem"}
+          gap={["1.7rem", "1.7rem", "2rem"]}
           backgroundColor={getColors(pokemon.types[0].type.name)}
-          mt={"2rem"}
+          mt={["3.5rem", "2rem"]}
         >
-          <Box px={"1.5rem"} pt={"1.5rem"}>
+          <Box px={["1rem", "1.5rem"]} pt={"1.5rem"}>
             <Text
               fontWeight={"700"}
               fontSize={"1rem"}
@@ -119,10 +119,10 @@ export const PokemonCard = ({
                 pokemon["sprites"]["other"]["official-artwork"]["front_default"]
               }
               alt={`Imagem do Pokémon ${pokemon.name}`}
-              w={"12.063rem"}
+              w={["8rem", "12.063rem"]}
               position={"absolute"}
-              right={"0.3rem"}
-              bottom={"4.5rem"}
+              right={["0", "0.2rem", "0.3rem"]}
+              bottom={["9.5rem", "4.5rem"]}
             />
             <HStack mt={"0.4rem"}>
               {pokemon.types.map((type) => {

@@ -42,18 +42,28 @@ const theme = extendTheme({
       sizes: {
         "1xs": {
           w: {
-            base: "6rem",
-            sm: "8rem",
+            base: "8rem",
+            sm: "9.5rem",
             md: "12rem",
             lg: "14rem",
             xl: "18rem",
           },
-          h: "4.625rem",
+          h: {
+            base: "2rem",
+            sm: "3.5rem",
+            md: "4.625rem",
+          },
         },
       },
       variants: {
         default: {
-          fontSize: "2xl",
+          fontSize: {
+            base: "md",
+            sm: "md",
+            md: "2xl",
+            lg: "2xl",
+            xl: "2xl",
+          },
           bg: "pokedex.blue.100",
           _hover: {
             bg: "pokedex.blue.200",
@@ -63,7 +73,11 @@ const theme = extendTheme({
           },
         },
         link: {
-          fontSize: "2xl",
+          fontSize: {
+            base: "sm",
+            md: "xl",
+            lg: "2xl",
+          },
           color: "black",
           textDecoration: "underline",
           _hover: {
@@ -74,9 +88,21 @@ const theme = extendTheme({
           },
         },
         addPokedex: {
-          fontSize: "md",
+          fontSize: {
+            base: "xs",
+            md: "sm",
+            lg: "md",
+          },
+          w: {
+            base: "10rem",
+            xl: "14.125rem",
+          },
+          h: {
+            base: "2rem",
+            sm: "3rem",
+            xl: "3.563rem",
+          },
           fontWeight: "400",
-          size: "2xs",
           bg: "pokedex.blue.100",
           _hover: {
             bg: "pokedex.blue.200",
@@ -86,7 +112,20 @@ const theme = extendTheme({
           },
         },
         delPokedex: {
-          fontSize: "md",
+          fontSize: {
+            base: "xs",
+            md: "sm",
+            lg: "md",
+          },
+          w: {
+            base: "10rem",
+            xl: "14.125rem",
+          },
+          h: {
+            base: "2rem",
+            sm: "3rem",
+            xl: "3.563rem",
+          },
           fontWeight: "400",
           size: "2xs",
           bg: "pokedex.red.100",
@@ -100,7 +139,7 @@ const theme = extendTheme({
         catch: {
           fontSize: "md",
           fontWeight: "400",
-          w: "9.125rem",
+          w: { base: "7rem", md: "9.125rem", lg: "9.125rem", xl: "9.125rem" },
           h: "2.375rem",
           bg: "white",
           color: "black",
@@ -115,7 +154,7 @@ const theme = extendTheme({
         delete: {
           fontSize: "md",
           fontWeight: "400",
-          w: "9.125rem",
+          w: { base: "7rem", md: "9.125rem", lg: "9.125rem", xl: "9.125rem" },
           h: "2.375rem",
           bg: "pokedex.red.100",
           _hover: {

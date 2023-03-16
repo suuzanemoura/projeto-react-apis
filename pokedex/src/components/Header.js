@@ -31,8 +31,14 @@ export const Header = ({ pokemon }) => {
       case "/":
         return (
           <>
+            <Box gridColumn={1} minW={"4.5rem"} />
             <Box display="flex" justifyContent="center" gridColumn={2}>
-              <Image src={Logo} alt="Logo do Pokémon" minW={"8rem"} />
+              <Image
+                src={Logo}
+                alt="Logo do Pokémon"
+                minW={"8rem"}
+                w={["10rem", "fit-content"]}
+              />
             </Box>
             <Box display="flex" justifyContent="end" gridColumn={3}>
               <Button
@@ -48,15 +54,30 @@ export const Header = ({ pokemon }) => {
       case `/page/${params.pageNumber}`:
         return (
           <>
-            <Box display="flex" justifyContent="start" gridColumn={1}>
+            <Box
+              display="flex"
+              justifyContent="start"
+              gridColumn={1}
+              order={[2, 1]}
+            >
               <Button variant="link" onClick={() => goToHomePage(navigate)}>
-                <ChevronLeftIcon w={25} h={25} /> Voltar para início
+                <ChevronLeftIcon minW={15} minH={15} /> Voltar ao início
               </Button>
             </Box>
-            <Box display="flex" justifyContent="center" gridColumn={2}>
-              <Image src={Logo} alt="Logo do Pokémon" minW={"8rem"} />
+            <Box
+              display="flex"
+              justifyContent="center"
+              gridColumn={2}
+              order={[1, 2]}
+            >
+              <Image
+                src={Logo}
+                alt="Logo do Pokémon"
+                minW={"8rem"}
+                w={["10rem", "fit-content"]}
+              />
             </Box>
-            <Box display="flex" justifyContent="end" gridColumn={3}>
+            <Box display="flex" justifyContent="end" gridColumn={3} order={3}>
               <Button
                 onClick={() => {
                   goToPokedexPage(navigate);
@@ -70,41 +91,88 @@ export const Header = ({ pokemon }) => {
       case "/pokedex":
         return (
           <>
-            <Box display="flex" justifyContent="start" gridColumn={1}>
+            <Box
+              display="flex"
+              justifyContent="start"
+              gridColumn={1}
+              order={[3, 1]}
+            >
               <Button variant="link" onClick={() => goToHomePage(navigate)}>
-                <ChevronLeftIcon w={25} h={25} /> Todos Pokémons
+                <ChevronLeftIcon minW={15} minH={15} /> Todos Pokémons
               </Button>
             </Box>
-            <Box display="flex" justifyContent="center" gridColumn={2}>
-              <Image src={Logo} alt="Logo do Pokémon" minW={"8rem"} />
+            <Box
+              display="flex"
+              justifyContent="center"
+              gridColumn={2}
+              order={2}
+            >
+              <Image
+                src={Logo}
+                alt="Logo do Pokémon"
+                minW={"8rem"}
+                w={["10rem", "fit-content"]}
+              />
             </Box>
+            <Box gridColumn={3} minW={"4.5rem"} order={[1, 3]} />
           </>
         );
       case `/pokedex/${params.pokedexPage}`:
         return (
           <>
-            <Box display="flex" justifyContent="start" gridColumn={1}>
+            <Box
+              display="flex"
+              justifyContent="start"
+              gridColumn={1}
+              order={[3, 1]}
+            >
               <Button variant="link" onClick={() => goToHomePage(navigate)}>
-                <ChevronLeftIcon w={25} h={25} /> Todos Pokémons
+                <ChevronLeftIcon minW={15} minH={15} /> Todos Pokémons
               </Button>
             </Box>
-            <Box display="flex" justifyContent="center" gridColumn={2}>
-              <Image src={Logo} alt="Logo do Pokémon" minW={"8rem"} />
+            <Box
+              display="flex"
+              justifyContent="center"
+              gridColumn={2}
+              order={2}
+            >
+              <Image
+                src={Logo}
+                alt="Logo do Pokémon"
+                minW={"8rem"}
+                w={["10rem", "fit-content"]}
+              />
             </Box>
+            <Box gridColumn={3} minW={"4.5rem"} order={[1, 3]} />
           </>
         );
       case `/pokemon/${params.pokemon}`:
         return (
           <>
-            <Box display="flex" justifyContent="start" gridColumn={1}>
+            <Box
+              display="flex"
+              justifyContent="start"
+              gridColumn={1}
+              order={[2, 1]}
+            >
               <Button variant="link" onClick={() => navigate(-1)}>
-                <ChevronLeftIcon w={25} h={25} /> Voltar
+                <ChevronLeftIcon minW={15} minH={15} /> Página anterior
               </Button>
             </Box>
-            <Box display="flex" justifyContent="center" gridColumn={2}>
-              <Image src={Logo} alt="Logo do Pokémon" minW={"8rem"} />
+            <Box
+              display="flex"
+              justifyContent="center"
+              gridColumn={2}
+              order={[1, 2]}
+            >
+              <Image
+                src={Logo}
+                alt="Logo do Pokémon"
+                minW={"8rem"}
+                w={["10rem", "fit-content"]}
+              />
             </Box>
-            <Box display="flex" justifyContent="end" gridColumn={3}>
+            <Box display="flex" justifyContent="end" gridColumn={3} order={3}>
               {pokedex.find(
                 (pokemonInPokedex) => pokemon.name === pokemonInPokedex
               ) ? (
@@ -147,8 +215,18 @@ export const Header = ({ pokemon }) => {
         );
       default:
         return (
-          <Box display="flex" justifyContent="center" gridColumn={2}>
-            <Image src={Logo} alt="Logo do Pokémon" minW={"8rem"} />
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems={"center"}
+            gridColumn={2}
+          >
+            <Image
+              src={Logo}
+              alt="Logo do Pokémon"
+              minW={"12rem"}
+              w={["12rem", "fit-content"]}
+            />
           </Box>
         );
     }
@@ -159,11 +237,15 @@ export const Header = ({ pokemon }) => {
       as="nav"
       bg="white"
       h="10rem"
-      px="3rem"
-      display="grid"
-      gridTemplateColumns="repeat(3, 1fr)"
-      alignItems="center"
-      justifyContent="space-between"
+      px={["1rem", "2rem", "3rem"]}
+      display={["flex", "grid"]}
+      gridTemplateColumns="repeat(auto-fit, minmax(50px, 1fr))"
+      alignItems={"center"}
+      justifyContent={["center", "space-between"]}
+      flexWrap={"wrap"}
+      gridColumnGap={"1rem"}
+      flexDirection={"column"}
+      rowGap={"0.5rem"}
     >
       {renderHeader()}
     </Box>
