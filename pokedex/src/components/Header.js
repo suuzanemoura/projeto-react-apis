@@ -1,10 +1,11 @@
-import { Box, Button, Image } from "@chakra-ui/react";
+import { Box, Button, Image, useDisclosure } from "@chakra-ui/react";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import Logo from "../assets/imgs/Pokemon_Logo.svg";
 import { goToHomePage, goToPokedexPage } from "../routes/coordinator";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useContext } from "react";
 import { GlobalContext } from "../contexts/GlobalContext";
+import { PokemonModal } from "./Modal";
 
 export const Header = ({ pokemon }) => {
   const navigate = useNavigate();
@@ -13,6 +14,17 @@ export const Header = ({ pokemon }) => {
 
   const { pokedex, addToPokedex, removeFromPokedex } =
     useContext(GlobalContext);
+
+  const { isOpen, onClose, onOpen } = useDisclosure();
+  const addModal = () => {
+    onClose();
+    addToPokedex(pokemon.name);
+  };
+
+  const deleteModal = () => {
+    onClose();
+    removeFromPokedex(pokemon.name);
+  };
 
   const renderHeader = () => {
     switch (location.pathname) {
@@ -94,26 +106,41 @@ export const Header = ({ pokemon }) => {
             </Box>
             <Box display="flex" justifyContent="end" gridColumn={3}>
               {pokedex.find(
-                (pokemonInPokedex) => pokemon.name === pokemonInPokedex.name
+                (pokemonInPokedex) => pokemon.name === pokemonInPokedex
               ) ? (
-                <Button
-                  variant="delPokedex"
-                  onClick={() => {
-                    removeFromPokedex(pokemon);
-                  }}
-                >
-                  Excluir da Pokédex
-                </Button>
+                <>
+                  <Button
+                    variant="delPokedex"
+                    onClick={() => {
+                      onOpen();
+                    }}
+                  >
+                    Excluir da Pokédex
+                  </Button>
+                  <PokemonModal
+                    isOpen={isOpen}
+                    onClose={deleteModal}
+                    title={"Oh, no!"}
+                    body={"O Pokémon foi removido da sua Pokedéx"}
+                  />
+                </>
               ) : (
-                <Button
-                  variant="addPokedex"
-                  onClick={() => {
-                    addToPokedex(pokemon);
-                    goToPokedexPage(navigate);
-                  }}
-                >
-                  Adicionar na Pokédex
-                </Button>
+                <>
+                  <Button
+                    variant="addPokedex"
+                    onClick={() => {
+                      onOpen();
+                    }}
+                  >
+                    Adicionar na Pokédex
+                  </Button>
+                  <PokemonModal
+                    isOpen={isOpen}
+                    onClose={addModal}
+                    title={"Gotcha!"}
+                    body={"O Pokémon foi adicionado a sua Pokédex"}
+                  />
+                </>
               )}
             </Box>
           </>
