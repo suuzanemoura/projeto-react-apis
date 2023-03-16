@@ -66,161 +66,163 @@ export const HomePage = () => {
   }, []);
 
   return (
-    <Flex direction="column" flex="1">
+    <Flex direction="column">
       <Header />
-      <Box
-        as="main"
-        flex="1"
-        py={"3.75rem"}
-        px={"2rem"}
-        justifyContent={"center"}
-        display={"flex"}
-      >
-        <Box
-          display={"flex"}
-          flexWrap={"wrap"}
-          gap={"1.5rem"}
-          w={"86rem"}
-          justifyContent={"left"}
-        >
-          <Heading as="h1" size="xl" mb={"2rem"} w={"full"}>
-            Todos os Pokémons
-          </Heading>
-
-          {error ? (
-            <Flex align="center" justify="center" m="4rem">
-              <Alert
-                status="error"
-                variant="subtle"
-                flexDirection="column"
-                alignItems="center"
-                justifyContent="center"
-                textAlign="center"
-                height="12.5rem"
-                bg="pokedex.red.300"
-                maxWidth="lg"
-              >
-                <AlertIcon boxSize="2.5rem" mr={0} color="white" />
-                <AlertTitle mt={4} mb={1} fontSize="lg">
-                  Erro na requisição!
-                </AlertTitle>
-                <AlertDescription maxWidth="md">
-                  Por favor, verifique sua internet. Depois recarregue a página
-                  e tente novamente.
-                </AlertDescription>
-              </Alert>
-            </Flex>
-          ) : isLoading ? (
-            <Flex align="center" justify="center" m="4rem">
-              <Image
-                src={Loading}
-                alt="Animação da Pokébola carregando"
-                mixBlendMode={"lighten"}
-              ></Image>
-            </Flex>
-          ) : loaded ? (
-            pokemons.map((pokemon) => {
-              return (
-                <PokemonCard
-                  key={pokemon.url}
-                  pokemonUrl={pokemon.url}
-                  addToPokedex={addToPokedex}
-                />
-              );
-            })
-          ) : (
-            <Text>Carregando, por favor aguarde.</Text>
-          )}
-          <Stack w={"full"}>
-            <Pagination
-              pagesCount={pagesCount}
-              currentPage={currentPage}
-              onPageChange={handlePageChange}
+      <Flex align={"center"} justify={"center"}>
+        <Box as="main" py={"3.75rem"} px={["0.7rem", "2rem"]}>
+          <Box
+            display={"flex"}
+            flexWrap={"wrap"}
+            gap={"1.5rem"}
+            maxW={"115rem"}
+            w={"fit-content"}
+            justifyContent={"center"}
+          >
+            <Heading
+              as="h1"
+              size="xl"
+              mb={"2rem"}
+              w={"100%"}
+              textAlign={["center", "left"]}
             >
-              <PaginationContainer
-                align="center"
-                justify="center"
-                mt={"2rem"}
-                w="full"
+              Todos os Pokémons
+            </Heading>
+
+            {error ? (
+              <Flex align="center" justify="center" m="4rem">
+                <Alert
+                  status="error"
+                  variant="subtle"
+                  flexDirection="column"
+                  alignItems="center"
+                  justifyContent="center"
+                  textAlign="center"
+                  height="12.5rem"
+                  bg="pokedex.red.300"
+                  maxWidth="lg"
+                >
+                  <AlertIcon boxSize="2.5rem" mr={0} color="white" />
+                  <AlertTitle mt={4} mb={1} fontSize="lg">
+                    Erro na requisição!
+                  </AlertTitle>
+                  <AlertDescription maxWidth="md">
+                    Por favor, verifique sua internet. Depois recarregue a
+                    página e tente novamente.
+                  </AlertDescription>
+                </Alert>
+              </Flex>
+            ) : isLoading ? (
+              <Flex align="center" justify="center" m="4rem">
+                <Image
+                  src={Loading}
+                  alt="Animação da Pokébola carregando"
+                  mixBlendMode={"lighten"}
+                ></Image>
+              </Flex>
+            ) : loaded ? (
+              pokemons.map((pokemon) => {
+                return (
+                  <PokemonCard
+                    key={pokemon.url}
+                    pokemonUrl={pokemon.url}
+                    addToPokedex={addToPokedex}
+                  />
+                );
+              })
+            ) : (
+              <Text>Carregando, por favor aguarde.</Text>
+            )}
+            <Stack w={"full"}>
+              <Pagination
+                pagesCount={pagesCount}
+                currentPage={currentPage}
+                onPageChange={handlePageChange}
               >
-                <PaginationPrevious
-                  w={8}
-                  h={8}
-                  mx={1}
-                  _hover={{
-                    bg: "yellow.400",
-                  }}
-                  bg="white"
-                  onClick={() => {
-                    currentPage === 2
-                      ? goToHomePage(navigate)
-                      : goToNumberPage(navigate, currentPage - 1);
-                  }}
-                >
-                  <Text>
-                    <ChevronLeftIcon color={"pokedex.blue.300"} />
-                  </Text>
-                </PaginationPrevious>
-                <PaginationPageGroup
-                  isInline
+                <PaginationContainer
                   align="center"
-                  separator={
-                    <PaginationSeparator
-                      bg="blue.300"
-                      fontSize="sm"
-                      w={8}
-                      h={8}
-                      jumpSize={5}
-                    />
-                  }
+                  justify="center"
+                  mt={"2rem"}
+                  w="full"
                 >
-                  {pages.map((page) => (
-                    <PaginationPage
-                      w={8}
-                      h={8}
-                      bg="white"
-                      color={"pokedex.blue.300"}
-                      key={`pagination_page_${page}`}
-                      page={page}
-                      onClick={() => {
-                        page === 1
-                          ? goToHomePage(navigate)
-                          : goToNumberPage(navigate, page);
-                      }}
-                      fontSize="sm"
-                      _hover={{
-                        bg: "pokedex.blue.100",
-                        color: "white",
-                      }}
-                      _current={{
-                        bg: "pokedex.blue.200",
-                        color: "white",
-                        fontSize: "sm",
-                        w: 8,
-                        h: 8,
-                      }}
-                    />
-                  ))}
-                </PaginationPageGroup>
-                <PaginationNext
-                  w={8}
-                  h={8}
-                  mx={1}
-                  _hover={{
-                    bg: "yellow.400",
-                  }}
-                  bg="white"
-                  onClick={() => goToNumberPage(navigate, currentPage + 1)}
-                >
-                  <Text>
-                    <ChevronRightIcon color={"pokedex.blue.300"} />
-                  </Text>
-                </PaginationNext>
-              </PaginationContainer>
-            </Pagination>
-          </Stack>
+                  <PaginationPrevious
+                    w={8}
+                    h={8}
+                    mx={1}
+                    _hover={{
+                      bg: "yellow.400",
+                    }}
+                    bg="white"
+                    onClick={() => {
+                      currentPage === 2
+                        ? goToHomePage(navigate)
+                        : goToNumberPage(navigate, currentPage - 1);
+                    }}
+                  >
+                    <Text>
+                      <ChevronLeftIcon color={"pokedex.blue.300"} />
+                    </Text>
+                  </PaginationPrevious>
+                  <PaginationPageGroup
+                    isInline
+                    align="center"
+                    separator={
+                      <PaginationSeparator
+                        bg="blue.300"
+                        fontSize="sm"
+                        w={8}
+                        h={8}
+                        jumpSize={1}
+                      />
+                    }
+                  >
+                    {pages.map((page) => (
+                      <PaginationPage
+                        w={8}
+                        h={8}
+                        bg="white"
+                        color={"pokedex.blue.300"}
+                        key={`pagination_page_${page}`}
+                        page={page}
+                        onClick={() => {
+                          page === 1
+                            ? goToHomePage(navigate)
+                            : goToNumberPage(navigate, page);
+                        }}
+                        fontSize="sm"
+                        _hover={{
+                          bg: "pokedex.blue.100",
+                          color: "white",
+                        }}
+                        _current={{
+                          bg: "pokedex.blue.200",
+                          color: "white",
+                          fontSize: "sm",
+                          w: 8,
+                          h: 8,
+                        }}
+                      />
+                    ))}
+                  </PaginationPageGroup>
+                  <PaginationNext
+                    w={8}
+                    h={8}
+                    mx={1}
+                    _hover={{
+                      bg: "yellow.400",
+                    }}
+                    bg="white"
+                    onClick={() => goToNumberPage(navigate, currentPage + 1)}
+                  >
+                    <Text>
+                      <ChevronRightIcon color={"pokedex.blue.300"} />
+                    </Text>
+                  </PaginationNext>
+                </PaginationContainer>
+              </Pagination>
+            </Stack>
+          </Box>
         </Box>
-      </Box>
+      </Flex>
       <Footer />
     </Flex>
   );

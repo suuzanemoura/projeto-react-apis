@@ -35,7 +35,9 @@ export const NotFoundPage = () => {
         <Text fontSize="xl" mt={3} mb={2} fontWeight="700">
           Page Not Found
         </Text>
-        <Text mb={6}>Ops! Essa página foi levada pela Equipe Rocket!</Text>
+        <Text textAlign={"center"} mb={6}>
+          Ops! Essa página foi levada pela Equipe Rocket!
+        </Text>
         <Button variant={"notFound"} onClick={() => goToHomePage(navigate)}>
           Volte para o início
         </Button>
@@ -43,8 +45,9 @@ export const NotFoundPage = () => {
         <Image
           src={EquipeRocket}
           alt="Equipe Rocket do desenho Pokémon."
-          h="xs"
-          mt="2rem"
+          objectFit={"contain"}
+          h={"xs"}
+          mt={"2rem"}
         />
       </Box>
 

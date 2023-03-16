@@ -50,7 +50,7 @@ export const Footer = () => {
       >
         <Image w="32" src={Logo} alt="Logo do Pokémon" />
         <Text fontSize={14} textAlign="center">
-          Pokédex © 2023. Todos os direitos reservados.
+          Pokédex © Nintendo, 2023. Todos os direitos reservados.
           <br />
           Desenvolvido por Suzane Moura.
         </Text>
