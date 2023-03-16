@@ -98,13 +98,17 @@ export const PokemonCard = ({
           mt={"2rem"}
         >
           <Box px={"1.5rem"} pt={"1.5rem"}>
-            <Text fontWeight={"700"} fontSize={"1rem"} fontFamily={"Inter"}>
+            <Text
+              fontWeight={"700"}
+              fontSize={"1rem"}
+              fontFamily={"'Inter', sans-serif"}
+            >
               #{pokemon.id < 10 ? `0${pokemon.id}` : pokemon.id}
             </Text>
             <Heading
               as="h1"
               fontSize={"2rem"}
-              fontFamily={"Inter"}
+              fontFamily={"'Inter', sans-serif"}
               fontWeight={"700"}
               textTransform="capitalize"
             >

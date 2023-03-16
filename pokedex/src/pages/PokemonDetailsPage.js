@@ -180,7 +180,7 @@ export const PokemonDetailsPage = () => {
                     as="h2"
                     fontSize={"2xl"}
                     fontWeight={"800"}
-                    fontFamily={"Inter, sans serif"}
+                    fontFamily={"'Inter', sans-serif"}
                     mb={"1.25rem"}
                   >
                     Base stats
@@ -188,7 +188,7 @@ export const PokemonDetailsPage = () => {
                   <Grid
                     w={"full"}
                     templateRows={"repeat(8, 1fr)"}
-                    fontFamily={"Inter, sans serif"}
+                    fontFamily={"'Inter', sans-serif"}
                   >
                     {pokemon.stats.map((stat) => {
                       return (
@@ -216,14 +216,14 @@ export const PokemonDetailsPage = () => {
                   <Text
                     fontWeight={"700"}
                     fontSize={"1rem"}
-                    fontFamily={"Inter"}
+                    fontFamily={"'Inter', sans-serif"}
                   >
                     #{pokemon.id < 10 ? `0${pokemon.id}` : pokemon.id}
                   </Text>
                   <Heading
                     as="h1"
                     fontSize={"44px"}
-                    fontFamily={"Inter"}
+                    fontFamily={"'Inter', sans-serif"}
                     fontWeight={"700"}
                     textTransform="capitalize"
                   >
@@ -253,7 +253,7 @@ export const PokemonDetailsPage = () => {
                     as="h2"
                     fontSize={"2xl"}
                     fontWeight={"800"}
-                    fontFamily={"Inter, sans serif"}
+                    fontFamily={"'Inter', sans-serif"}
                     mb={"1.25rem"}
                   >
                     Moves:
