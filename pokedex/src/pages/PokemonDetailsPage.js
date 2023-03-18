@@ -54,7 +54,7 @@ export const PokemonDetailsPage = () => {
       <Box
         as="main"
         flex="1"
-        py={"6.5rem"}
+        py={{ base: "3rem", lg: "5.5rem" }}
         px={"2rem"}
         display={"flex"}
         justifyContent={"center"}
@@ -75,7 +75,7 @@ export const PokemonDetailsPage = () => {
               base: "lg",
               md: "xl",
             }}
-            mb={"3.5rem"}
+            mb={"3rem"}
             px={{ base: "1rem", md: "2.75rem" }}
           >
             Detalhes
@@ -127,12 +127,10 @@ export const PokemonDetailsPage = () => {
               backgroundRepeat={"no-repeat"}
               backgroundPosition={{ base: "top right", "3xl": "right" }}
               backgroundSize={{
-                base: "60%",
-                sm: "50%",
-                "2sm": "40%",
-                md: "50%",
-                lg: "55%",
-                xl: "40%",
+                base: "10rem",
+                md: "15rem",
+                lg: "20rem",
+                xl: "28rem",
                 "3xl": "contain",
               }}
               backgroundColor={getColors(pokemon.types[0].type.name)}
@@ -153,10 +151,10 @@ export const PokemonDetailsPage = () => {
                   ]
                 }
                 alt={`Imagem do Pokémon ${pokemon.name}`}
-                w={{ base: "6rem", md: "10rem", lg: "16.875rem" }}
+                w={{ base: "6rem", md: "10rem", lg: "14rem", xl: "16.875rem" }}
                 position={"absolute"}
-                right={{ base: "1rem", lg: "2.3rem" }}
-                top={{ base: "-3rem", md: "-5rem", lg: "-8.5rem" }}
+                right={{ base: "1rem", xl: "2.3rem" }}
+                top={{ base: "-3rem", md: "-5rem", lg: "-7rem", xl: "-8.5rem" }}
               />
               <Box
                 gridColumn={{ base: 1, "3xl": 2 }}
@@ -180,12 +178,12 @@ export const PokemonDetailsPage = () => {
                   </Text>
                   <Heading
                     as="h1"
-                    fontSize={{ base: "2rem", lg: "3rem" }}
+                    fontSize={{ base: "2rem", lg: "2.8rem", xl: "3rem" }}
                     fontFamily={"'Inter', sans-serif"}
                     fontWeight={"700"}
                     textTransform="capitalize"
                   >
-                    {pokemon.name}
+                    {pokemon.name.replace("-", " ")}
                   </Heading>
                   <HStack mt={"0.4rem"}>
                     {pokemon.types.map((type) => {
@@ -275,10 +273,30 @@ export const PokemonDetailsPage = () => {
                     src={
                       pokemon["sprites"]["versions"]["generation-v"][
                         "black-white"
-                      ]["animated"]["front_default"]
+                      ]["animated"]["front_default"] === null
+                        ? pokemon["sprites"]["other"]["home"]["front_default"]
+                        : pokemon["sprites"]["versions"]["generation-v"][
+                            "black-white"
+                          ]["animated"]["front_default"]
                     }
-                    alt={`Gif frontal do Pokémon ${pokemon.name}`}
-                    w={{ base: "3rem", md: "4rem", lg: "6.25rem" }}
+                    alt={
+                      pokemon["sprites"]["versions"]["generation-v"][
+                        "black-white"
+                      ]["animated"]["front_default"] === null
+                        ? `Arte frontal do Pokémon ${pokemon.name}`
+                        : `Gif das costas do Pokémon ${pokemon.name}`
+                    }
+                    w={
+                      pokemon["sprites"]["versions"]["generation-v"][
+                        "black-white"
+                      ]["animated"]["front_default"] === null
+                        ? {
+                            base: "4rem",
+                            md: "8rem",
+                            "3xl": "12rem",
+                          }
+                        : { base: "3rem", md: "4rem", lg: "6.25rem" }
+                    }
                   />
                 </Box>
                 <Box
@@ -295,10 +313,30 @@ export const PokemonDetailsPage = () => {
                     src={
                       pokemon["sprites"]["versions"]["generation-v"][
                         "black-white"
-                      ]["animated"]["back_default"]
+                      ]["animated"]["back_default"] === null
+                        ? pokemon["sprites"]["other"]["home"]["front_shiny"]
+                        : pokemon["sprites"]["versions"]["generation-v"][
+                            "black-white"
+                          ]["animated"]["back_default"]
                     }
-                    alt={`Gif das costas do Pokémon ${pokemon.name}`}
-                    w={{ base: "3rem", md: "4rem", lg: "6.25rem" }}
+                    alt={
+                      pokemon["sprites"]["versions"]["generation-v"][
+                        "black-white"
+                      ]["animated"]["back_default"] === null
+                        ? `Arte frontal shiny do Pokémon ${pokemon.name}`
+                        : `Gif das costas do Pokémon ${pokemon.name}`
+                    }
+                    w={
+                      pokemon["sprites"]["versions"]["generation-v"][
+                        "black-white"
+                      ]["animated"]["back_default"] === null
+                        ? {
+                            base: "4rem",
+                            md: "8rem",
+                            "3xl": "12rem",
+                          }
+                        : { base: "3rem", md: "4rem", lg: "6.25rem" }
+                    }
                   />
                 </Box>
                 <Box
