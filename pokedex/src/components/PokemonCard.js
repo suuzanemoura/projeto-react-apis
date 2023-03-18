@@ -97,16 +97,21 @@ export const PokemonCard = ({
           display={"flex"}
           flexWrap={"wrap"}
           w={{ base: "16rem", sm: "18rem", "2sm": "20.5rem", md: "27.5rem" }}
-          h={{ base: "fit-content", "2sm": "13.125rem" }}
+          h={"13.125rem"}
           borderRadius={"1rem"}
           backgroundImage={Pokebola}
           backgroundRepeat={"no-repeat"}
-          backgroundPosition={"right"}
-          gap={"2rem"}
+          backgroundPosition={"top right"}
+          backgroundSize={{
+            base: "10rem",
+            "2sm": "11rem",
+            md: "contain",
+          }}
+          gap={pokemon.name.length > 15 ? "2.6rem" : "2rem"}
           backgroundColor={getColors(pokemon.types[0].type.name)}
-          mt={{ base: "3.75rem", "2sm": "2.2rem", md: "2rem" }}
+          mt={{ base: "4rem", "2sm": "2.5rem" }}
         >
-          <Box px={["1rem", "1.5rem"]} pt={"1.5rem"}>
+          <Box px={"1.5rem"} pt={"1.5rem"}>
             <Text
               fontWeight={"700"}
               fontSize={"1rem"}
@@ -116,12 +121,16 @@ export const PokemonCard = ({
             </Text>
             <Heading
               as="h1"
-              fontSize={{ base: "1.5rem", md: "2rem" }}
+              fontSize={
+                pokemon.name.length > 15
+                  ? { base: "1.2rem", md: "1.5rem" }
+                  : { base: "1.5rem", md: "2rem" }
+              }
               fontFamily={"'Inter', sans-serif"}
               fontWeight={"700"}
               textTransform="capitalize"
             >
-              {pokemon.name}
+              {pokemon.name.replace("-", " ")}
             </Heading>
             <Image
               src={

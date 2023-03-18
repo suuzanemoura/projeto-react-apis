@@ -79,9 +79,8 @@ export const PokedexPage = () => {
             <Heading
               as="h1"
               size={{
-                base: "md",
-                md: "lg",
-                xl: "xl",
+                base: "lg",
+                md: "xl",
               }}
               mb={"2rem"}
               w={"100%"}
@@ -116,7 +115,7 @@ export const PokedexPage = () => {
                 {filteredPokedex().map((pokemon) => {
                   return (
                     <PokemonCard
-                      key={pokemon}
+                      key={pokemon.name}
                       pokemonUrl={`${BASE_URL}${pokemon.name}`}
                       removeFromPokedex={removeFromPokedex}
                     />
@@ -128,7 +127,7 @@ export const PokedexPage = () => {
                 {filteredPokedexPage().map((pokemon) => {
                   return (
                     <PokemonCard
-                      key={pokemon}
+                      key={pokemon.name}
                       pokemonUrl={`${BASE_URL}${pokemon.name}`}
                       removeFromPokedex={removeFromPokedex}
                     />
@@ -150,8 +149,8 @@ export const PokedexPage = () => {
                     w="full"
                   >
                     <PaginationPrevious
-                      w={8}
-                      h={8}
+                      w={[6, 6, 6, 8]}
+                      h={[6, 6, 6, 8]}
                       mx={1}
                       _hover={{
                         bg: "yellow.400",
@@ -173,17 +172,17 @@ export const PokedexPage = () => {
                       separator={
                         <PaginationSeparator
                           bg="blue.300"
-                          fontSize="sm"
-                          w={8}
-                          h={8}
+                          fontSize={["xs", "xs", "xs", "sm"]}
+                          w={[6, 6, 6, 8]}
+                          h={[6, 6, 6, 8]}
                           jumpSize={1}
                         />
                       }
                     >
                       {pages.map((page) => (
                         <PaginationPage
-                          w={8}
-                          h={8}
+                          w={[6, 6, 6, 8]}
+                          h={[6, 6, 6, 8]}
                           bg="white"
                           color={"pokedex.blue.300"}
                           key={`pagination_page_${page}`}
@@ -193,7 +192,7 @@ export const PokedexPage = () => {
                               ? goToPokedexPage(navigate)
                               : goToPokedexNumberPage(navigate, page);
                           }}
-                          fontSize="sm"
+                          fontSize={["xs", "xs", "xs", "sm"]}
                           _hover={{
                             bg: "pokedex.blue.100",
                             color: "white",
@@ -201,16 +200,16 @@ export const PokedexPage = () => {
                           _current={{
                             bg: "pokedex.blue.200",
                             color: "white",
-                            fontSize: "sm",
-                            w: 8,
-                            h: 8,
+                            fontSize: ["xs", "xs", "xs", "sm"],
+                            w: [6, 6, 6, 8],
+                            h: [6, 6, 6, 8],
                           }}
                         />
                       ))}
                     </PaginationPageGroup>
                     <PaginationNext
-                      w={8}
-                      h={8}
+                      w={[6, 6, 6, 8]}
+                      h={[6, 6, 6, 8]}
                       mx={1}
                       _hover={{
                         bg: "yellow.400",
