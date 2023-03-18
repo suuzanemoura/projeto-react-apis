@@ -45,9 +45,9 @@ react-icons
 - Design System (Chakra UI)
 - localStorage
 
-### Funcionalidades:
+### Funcionalidades
 
-- Listagem: Lista de 1008 pokémons principais dos 1281 disponíveis na PokeAPI, organizados por página (21 pokémons em cada);
+- Listagem: Lista de 1008 pokémons principais dos 1281 disponíveis na PokeAPI, organizados por página (24 pokémons em cada);
 - Card: Cada pokémon é representado por um card que contém: nome, id, tipo, imagem, botão de captura e botão para página de detalhes.
 - Detalhes: Página com os principais detalhes do pókemon: nome, id, tipo, imagem, gif de front e back, base stats (estatísticas) e seus primeiros moves (movimentos).
 - Captura: Adicionar pokémons a pokédex;
