@@ -26,7 +26,11 @@ export function BaseStatBar({ value, name, stats }) {
         <GridItem>
           <Box
             display={"grid"}
-            gridTemplateColumns={"3.75rem 2.125rem 1fr"}
+            gridTemplateColumns={{
+              base: "2fr 1fr 3fr",
+              md: "2fr 1fr 5fr",
+              lg: "3.75rem 2.125rem 1fr",
+            }}
             alignItems={"center"}
             w={"100%"}
             h={"28px"}
@@ -34,14 +38,18 @@ export function BaseStatBar({ value, name, stats }) {
             borderTop={"1px solid RGBA(0, 0, 0, 0.06)"}
           >
             <Text
-              fontSize={"14px"}
+              fontSize={{ base: "12px", md: "14px" }}
               col={1}
               justifySelf={"right"}
               color={"RGBA(0, 0, 0, 0.48)"}
             >
               {getStatName(name)}
             </Text>
-            <Text fontSize={"14px"} col={2} justifySelf={"center"}>
+            <Text
+              fontSize={{ base: "12px", md: "14px" }}
+              col={2}
+              justifySelf={"center"}
+            >
               {value}
             </Text>
             <Box justifySelf={"left"} w={"100%"}>
@@ -59,7 +67,11 @@ export function BaseStatBar({ value, name, stats }) {
           <GridItem>
             <Box
               display={"grid"}
-              gridTemplateColumns={"3.75rem 2.125rem 1fr"}
+              gridTemplateColumns={{
+                base: "2fr 1fr 3fr",
+                md: "2fr 1fr 5fr",
+                lg: "3.75rem 2.125rem 1fr",
+              }}
               alignItems={"center"}
               w={"100%"}
               h={"28px"}
@@ -67,7 +79,7 @@ export function BaseStatBar({ value, name, stats }) {
               borderY={"1px solid RGBA(0, 0, 0, 0.06)"}
             >
               <Text
-                fontSize={"14px"}
+                fontSize={{ base: "12px", md: "14px" }}
                 col={1}
                 justifySelf={"right"}
                 color={"RGBA(0, 0, 0, 0.48)"}
@@ -75,7 +87,7 @@ export function BaseStatBar({ value, name, stats }) {
                 Total
               </Text>
               <Text
-                fontSize={"14px"}
+                fontSize={{ base: "12px", md: "14px" }}
                 col={2}
                 justifySelf={"center"}
                 fontWeight={"700"}

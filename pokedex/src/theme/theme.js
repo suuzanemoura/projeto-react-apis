@@ -1,5 +1,17 @@
 import { extendTheme } from "@chakra-ui/react";
 
+const breakpoints = {
+  sm: "320px",
+  "2sm": "360px",
+  md: "480px",
+  lg: "768px",
+  xl: "980px",
+  "2xl": "1280px",
+  "3xl": "1440px",
+  "4xl": "1600px",
+  "5xl": "1920px",
+};
+
 const theme = extendTheme({
   fonts: {
     heading: `'Poppins', sans-serif`,
@@ -39,30 +51,24 @@ const theme = extendTheme({
       baseStyle: {
         fontWeight: "700",
       },
-      sizes: {
-        "1xs": {
-          w: {
-            base: "8rem",
-            sm: "9.5rem",
-            md: "12rem",
-            lg: "14rem",
-            xl: "18rem",
-          },
-          h: {
-            base: "2rem",
-            sm: "3.5rem",
-            md: "4.625rem",
-          },
-        },
-      },
       variants: {
         default: {
           fontSize: {
             base: "md",
             sm: "md",
             md: "2xl",
-            lg: "2xl",
-            xl: "2xl",
+          },
+          w: {
+            base: "9rem",
+            md: "10.5rem",
+            lg: "12rem",
+            xl: "15rem",
+            "2xl": "18rem",
+          },
+          h: {
+            base: "3rem",
+            md: "3.625rem",
+            lg: "4.625rem",
           },
           bg: "pokedex.blue.100",
           _hover: {
@@ -74,9 +80,9 @@ const theme = extendTheme({
         },
         link: {
           fontSize: {
-            base: "sm",
+            base: "md",
             md: "xl",
-            lg: "2xl",
+            xl: "2xl",
           },
           color: "black",
           textDecoration: "underline",
@@ -90,11 +96,11 @@ const theme = extendTheme({
         addPokedex: {
           fontSize: {
             base: "xs",
-            md: "sm",
             lg: "md",
           },
           w: {
             base: "10rem",
+            sm: "12rem",
             xl: "14.125rem",
           },
           h: {
@@ -114,17 +120,17 @@ const theme = extendTheme({
         delPokedex: {
           fontSize: {
             base: "xs",
-            md: "sm",
             lg: "md",
           },
           w: {
             base: "10rem",
+            sm: "12rem",
             xl: "14.125rem",
           },
           h: {
             base: "2rem",
             sm: "3rem",
-            xl: "3.563rem",
+            lg: "3.563rem",
           },
           fontWeight: "400",
           size: "2xs",
@@ -139,7 +145,11 @@ const theme = extendTheme({
         catch: {
           fontSize: "md",
           fontWeight: "400",
-          w: { base: "7rem", md: "9.125rem", lg: "9.125rem", xl: "9.125rem" },
+          w: {
+            base: "6rem",
+            "2sm": "7.5rem",
+            md: "9.125rem",
+          },
           h: "2.375rem",
           bg: "white",
           color: "black",
@@ -154,7 +164,11 @@ const theme = extendTheme({
         delete: {
           fontSize: "md",
           fontWeight: "400",
-          w: { base: "7rem", md: "9.125rem", lg: "9.125rem", xl: "9.125rem" },
+          w: {
+            base: "6rem",
+            "2sm": "7.5rem",
+            md: "9.125rem",
+          },
           h: "2.375rem",
           bg: "pokedex.red.100",
           _hover: {
@@ -191,7 +205,6 @@ const theme = extendTheme({
         },
       },
       defaultProps: {
-        size: "1xs",
         variant: "default",
       },
     },
@@ -221,6 +234,7 @@ const theme = extendTheme({
       },
     },
   },
+  breakpoints,
 });
 
 export default theme;

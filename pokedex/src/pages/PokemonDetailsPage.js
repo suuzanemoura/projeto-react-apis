@@ -49,29 +49,35 @@ export const PokemonDetailsPage = () => {
   };
 
   return (
-    <Flex direction="column" flex="1">
+    <Flex direction="column" minH={"100vh"}>
       <Header pokemon={pokemon} />
       <Box
         as="main"
         flex="1"
-        py={"3.75rem"}
+        py={"6.5rem"}
         px={"2rem"}
-        justifyContent={"center"}
         display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
         backgroundImage={Pokebola}
         backgroundRepeat={"no-repeat"}
         backgroundPosition={"center"}
         backgroundSize={"cover"}
-        minH={"100vh"}
       >
         <Box
           display={"flex"}
-          flexWrap={"wrap"}
-          gap={"1.5rem"}
-          w={"86rem"}
-          justifyContent={"left"}
+          justifyContent={"center"}
+          flexDirection={"column"}
         >
-          <Heading as="h1" size="xl" mb={"2rem"} w={"full"} px={"2.75rem"}>
+          <Heading
+            as="h1"
+            size={{
+              base: "lg",
+              md: "xl",
+            }}
+            mb={"3.5rem"}
+            px={{ base: "1rem", md: "2.75rem" }}
+          >
             Detalhes
           </Heading>
           {error ? (
@@ -108,28 +114,144 @@ export const PokemonDetailsPage = () => {
             </Flex>
           ) : loaded ? (
             <Card
-              w={"full"}
+              minW={{
+                base: "16rem",
+                md: "26rem",
+                xl: "56rem",
+                "2xl": "71rem",
+                "3xl": "86rem",
+              }}
+              h={{ base: "fit-content", "3xl": "41.5rem" }}
               borderRadius={"2.375rem"}
               backgroundImage={PokebolaCard}
               backgroundRepeat={"no-repeat"}
               backgroundPosition={"right"}
               backgroundSize={"contain"}
-              gap={"2rem"}
               backgroundColor={getColors(pokemon.types[0].type.name)}
               display={"grid"}
-              gridTemplateColumns={"repeat(2, 1fr)"}
-              px={"2.75rem"}
+              gridTemplateColumns={{ base: "1fr", "3xl": "repeat(2, 1fr)" }}
+              gridTemplateRows={{ base: "", "3xl": "1fr" }}
+              px={{ base: "1rem", md: "2.75rem" }}
               py={"1.625rem"}
-              gridGap={"4.25rem"}
+              gridColumnGap={"4.25rem"}
+              gridRowGap={"2rem"}
               mb={"2rem"}
+              position={"relative"}
             >
+              <Image
+                src={
+                  pokemon["sprites"]["other"]["official-artwork"][
+                    "front_default"
+                  ]
+                }
+                alt={`Imagem do Pokémon ${pokemon.name}`}
+                w={{ base: "6rem", md: "10rem", lg: "16.875rem" }}
+                position={"absolute"}
+                right={{ base: "1rem", lg: "2.3rem" }}
+                top={{ base: "-3rem", md: "-5rem", lg: "-8.5rem" }}
+              />
               <Box
-                gridColumn={"1"}
+                gridColumn={{ base: 1, "3xl": 2 }}
+                gridRow={{ base: 1, "3xl": 1 }}
                 display={"grid"}
-                gridTemplateColumns={"17.625rem 21.438rem"}
-                gridTemplateRows={"repeat(2, 1fr)"}
-                rowGap={"2.938rem"}
-                columnGap={"2.125rem"}
+                rowGap={{ base: "2rem", "3xl": "2.875rem" }}
+                columnGap={"1.313rem"}
+                color={"white"}
+              >
+                <Box
+                  gridColumn={1}
+                  gridRow={1}
+                  px={{ base: "0.5rem", md: "0" }}
+                >
+                  <Text
+                    fontWeight={"700"}
+                    fontSize={"1rem"}
+                    fontFamily={"'Inter', sans-serif"}
+                  >
+                    #{pokemon.id < 10 ? `0${pokemon.id}` : pokemon.id}
+                  </Text>
+                  <Heading
+                    as="h1"
+                    fontSize={{ base: "2rem", lg: "3rem" }}
+                    fontFamily={"'Inter', sans-serif"}
+                    fontWeight={"700"}
+                    textTransform="capitalize"
+                  >
+                    {pokemon.name}
+                  </Heading>
+                  <HStack mt={"0.4rem"}>
+                    {pokemon.types.map((type) => {
+                      return (
+                        <Image
+                          key={type.type.name}
+                          src={getTypes(type.type.name)}
+                          alt={`Imagem de Habilidade do Pokemon: Habilidade de ${type.type.name}`}
+                        />
+                      );
+                    })}
+                  </HStack>
+                </Box>
+                <Box
+                  gridColumn={1}
+                  gridRow={2}
+                  bg={"white"}
+                  borderRadius={"1rem"}
+                  color={"black"}
+                  p={"1.125rem"}
+                  w={{ base: "100%", "3xl": "18.25rem" }}
+                >
+                  <Heading
+                    as="h2"
+                    fontSize={"2xl"}
+                    fontWeight={"800"}
+                    fontFamily={"'Inter', sans-serif"}
+                    mb={"1.25rem"}
+                  >
+                    Moves:
+                  </Heading>
+                  <List
+                    display={"flex"}
+                    flexDirection={{ base: "row", "3xl": "column" }}
+                    justifyContent={"center"}
+                    gap={"1rem"}
+                    textTransform={"capitalize"}
+                    fontSize={"14px"}
+                    flexWrap={"wrap"}
+                  >
+                    {getMoves().map((move) => {
+                      return (
+                        <ListItem
+                          key={move}
+                          bgColor={"#ECECEC"}
+                          p={"0.625rem"}
+                          borderRadius={"0.75rem"}
+                          border={"1px dashed rgba(0, 0, 0, 0.14)"}
+                          borderWidth={"0.1rem"}
+                          w={"max-content"}
+                        >
+                          {move}
+                        </ListItem>
+                      );
+                    })}
+                  </List>
+                </Box>
+              </Box>
+              <Box
+                gridColumn={1}
+                gridRow={{ base: 2, "3xl": 1 }}
+                display={"grid"}
+                gridTemplateColumns={{
+                  base: "1fr 1fr",
+                  lg: "1fr 2fr",
+                  "3xl": "17.625rem 21.438rem",
+                }}
+                gridTemplateRows={{
+                  base: "1fr 3fr",
+                  md: "1fr 2fr",
+                  lg: "repeat(2, 1fr)",
+                }}
+                rowGap={{ base: "2rem", "3xl": "2.938rem" }}
+                columnGap={{ base: "2rem", "3xl": "2.125rem" }}
               >
                 <Box
                   gridColumn={1}
@@ -147,12 +269,12 @@ export const PokemonDetailsPage = () => {
                       ]["animated"]["front_default"]
                     }
                     alt={`Gif frontal do Pokémon ${pokemon.name}`}
-                    w={"6.25rem"}
+                    w={{ base: "3rem", md: "4rem", lg: "6.25rem" }}
                   />
                 </Box>
                 <Box
-                  gridColumn={1}
-                  gridRow={2}
+                  gridColumn={{ base: 2, lg: 1 }}
+                  gridRow={{ base: 1, lg: 2 }}
                   bg={"white"}
                   borderRadius={"1rem"}
                   display={"flex"}
@@ -166,12 +288,12 @@ export const PokemonDetailsPage = () => {
                       ]["animated"]["back_default"]
                     }
                     alt={`Gif das costas do Pokémon ${pokemon.name}`}
-                    w={"6.25rem"}
+                    w={{ base: "3rem", md: "4rem", lg: "6.25rem" }}
                   />
                 </Box>
                 <Box
-                  gridColumn={2}
-                  gridRow={"1 / span 2"}
+                  gridColumn={{ base: "1 / span 2", lg: 2 }}
+                  gridRow={{ base: 2, lg: "1 / span 2" }}
                   bg={"white"}
                   borderRadius={"1rem"}
                   p={"1.5rem"}
@@ -202,100 +324,6 @@ export const PokemonDetailsPage = () => {
                     <BaseStatBar name={"total"} stats={pokemon.stats} />
                   </Grid>
                 </Box>
-              </Box>
-              <Box
-                gridColumn={"2"}
-                display={"grid"}
-                gridTemplateColumns={"18.25rem 16.875rem"}
-                gridTemplateRows={"1fr 28.313rem "}
-                rowGap={"2.875rem"}
-                columnGap={"1.313rem"}
-                color={"white"}
-              >
-                <Box gridColumn={1} gridRow={1} borderRadius={"1rem"}>
-                  <Text
-                    fontWeight={"700"}
-                    fontSize={"1rem"}
-                    fontFamily={"'Inter', sans-serif"}
-                  >
-                    #{pokemon.id < 10 ? `0${pokemon.id}` : pokemon.id}
-                  </Text>
-                  <Heading
-                    as="h1"
-                    fontSize={"44px"}
-                    fontFamily={"'Inter', sans-serif"}
-                    fontWeight={"700"}
-                    textTransform="capitalize"
-                  >
-                    {pokemon.name}
-                  </Heading>
-                  <HStack mt={"0.4rem"}>
-                    {pokemon.types.map((type) => {
-                      return (
-                        <Image
-                          key={type.type.name}
-                          src={getTypes(type.type.name)}
-                          alt={`Imagem de Habilidade do Pokemon: Habilidade de ${type.type.name}`}
-                        />
-                      );
-                    })}
-                  </HStack>
-                </Box>
-                <Box
-                  gridColumn={1}
-                  gridRow={2}
-                  bg={"white"}
-                  borderRadius={"1rem"}
-                  color={"black"}
-                  p={"1.125rem"}
-                >
-                  <Heading
-                    as="h2"
-                    fontSize={"2xl"}
-                    fontWeight={"800"}
-                    fontFamily={"'Inter', sans-serif"}
-                    mb={"1.25rem"}
-                  >
-                    Moves:
-                  </Heading>
-                  <List
-                    display={"flex"}
-                    flexDirection={"column"}
-                    gap={"1rem"}
-                    textTransform={"capitalize"}
-                    fontSize={"14px"}
-                  >
-                    {getMoves().map((move) => {
-                      return (
-                        <ListItem
-                          key={move}
-                          bgColor={"#ECECEC"}
-                          p={"0.625rem"}
-                          borderRadius={"0.75rem"}
-                          border={"1px dashed rgba(0, 0, 0, 0.14)"}
-                          borderWidth={"0.1rem"}
-                          w={"max-content"}
-                        >
-                          {move}
-                        </ListItem>
-                      );
-                    })}
-                  </List>
-                </Box>
-                <Image
-                  gridColumn={2}
-                  gridRow={1}
-                  src={
-                    pokemon["sprites"]["other"]["official-artwork"][
-                      "front_default"
-                    ]
-                  }
-                  alt={`Imagem do Pokémon ${pokemon.name}`}
-                  w={"16.875rem"}
-                  position={"absolute"}
-                  right={"2.25rem"}
-                  bottom={"33.5rem"}
-                />
               </Box>
             </Card>
           ) : (

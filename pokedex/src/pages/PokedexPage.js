@@ -42,12 +42,12 @@ export const PokedexPage = () => {
       setCurrentPage(1);
       setOffset(0);
     } else {
-      setOffset((params.pokedexPage - 1) * 21);
+      setOffset((params.pokedexPage - 1) * 24);
     }
   }, [params.pokedexPage, currentPage, offset]);
 
   useEffect(() => {
-    if (pokedex.length === 21) {
+    if (pokedex.length === 24) {
       goToPokedexPage(navigate);
     }
   }, [pokedex, navigate]);
@@ -59,47 +59,65 @@ export const PokedexPage = () => {
         <Box
           as="main"
           py={"3.75rem"}
-          px={["0.7rem", "2rem"]}
-          minH={"70vh"}
-          mb={"2rem"}
+          px={{ base: "0.5rem", sm: "1rem", md: "2rem" }}
+          mb={pokedex.length === 0 ? 0 : "2rem"}
+          minH={"90vh"}
+          w={{
+            base: "30rem",
+            xl: "60.5rem",
+            "3xl": "89.5rem",
+            "5xl": "118.5rem",
+          }}
         >
           <Box
             display={"flex"}
             flexWrap={"wrap"}
             gap={"1.5rem"}
-            maxW={"115rem"}
-            w={"fit-content"}
             justifyContent={"center"}
+            alignItems={"center"}
           >
             <Heading
               as="h1"
-              size="xl"
+              size={{
+                base: "md",
+                md: "lg",
+                xl: "xl",
+              }}
               mb={"2rem"}
               w={"100%"}
-              textAlign={["center", "left"]}
+              textAlign={{
+                base: "center",
+                xl: "left",
+              }}
             >
               Meus Pokémons
             </Heading>
             {pokedex.length === 0 ? (
-              <>
+              <Flex
+                align={"center"}
+                justify={"center"}
+                flexDirection={"column"}
+                gap={"1rem"}
+              >
                 <Image
                   src={Pokebola}
                   alt={"Pokedex vazia."}
                   w={"20rem"}
                   objectFit={"contain"}
-                  ml={"1rem"}
+                  ml={"1.5rem"}
                 />
                 <Text textAlign={"center"}>
-                  Pokedex vazia! Capture seus pokémons favoritos.
+                  Pokedex vazia! <br />
+                  Capture seus pokémons favoritos.
                 </Text>
-              </>
+              </Flex>
             ) : params.pokedexPage === undefined ? (
               <>
                 {filteredPokedex().map((pokemon) => {
                   return (
                     <PokemonCard
                       key={pokemon}
-                      pokemonUrl={`${BASE_URL}${pokemon}`}
+                      pokemonUrl={`${BASE_URL}${pokemon.name}`}
                       removeFromPokedex={removeFromPokedex}
                     />
                   );
@@ -111,7 +129,7 @@ export const PokedexPage = () => {
                   return (
                     <PokemonCard
                       key={pokemon}
-                      pokemonUrl={`${BASE_URL}${pokemon}`}
+                      pokemonUrl={`${BASE_URL}${pokemon.name}`}
                       removeFromPokedex={removeFromPokedex}
                     />
                   );

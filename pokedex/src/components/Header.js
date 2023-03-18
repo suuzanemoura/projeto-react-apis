@@ -17,13 +17,22 @@ export const Header = ({ pokemon }) => {
 
   const { isOpen, onClose, onOpen } = useDisclosure();
   const addModal = () => {
-    onClose();
-    addToPokedex(pokemon.name);
+    onOpen();
+    setTimeout(() => {
+      addToPokedex({
+        id: pokemon.id,
+        name: pokemon.name,
+      });
+      onClose();
+    }, 1500);
   };
 
   const deleteModal = () => {
-    onClose();
-    removeFromPokedex(pokemon.name);
+    onOpen();
+    setTimeout(() => {
+      removeFromPokedex(pokemon.name);
+      onClose();
+    }, 1500);
   };
 
   const renderHeader = () => {
@@ -31,13 +40,12 @@ export const Header = ({ pokemon }) => {
       case "/":
         return (
           <>
-            <Box gridColumn={1} minW={"4.5rem"} />
             <Box display="flex" justifyContent="center" gridColumn={2}>
               <Image
                 src={Logo}
                 alt="Logo do Pokémon"
-                minW={"8rem"}
-                w={["10rem", "fit-content"]}
+                minW={"12rem"}
+                w={{ base: "12rem", sm: "14rem", lg: "fit-content" }}
               />
             </Box>
             <Box display="flex" justifyContent="end" gridColumn={3}>
@@ -58,7 +66,7 @@ export const Header = ({ pokemon }) => {
               display="flex"
               justifyContent="start"
               gridColumn={1}
-              order={[2, 1]}
+              order={{ base: 2, lg: 1 }}
             >
               <Button variant="link" onClick={() => goToHomePage(navigate)}>
                 <ChevronLeftIcon minW={15} minH={15} /> Voltar ao início
@@ -68,13 +76,13 @@ export const Header = ({ pokemon }) => {
               display="flex"
               justifyContent="center"
               gridColumn={2}
-              order={[1, 2]}
+              order={{ base: 1, lg: 2 }}
             >
               <Image
                 src={Logo}
                 alt="Logo do Pokémon"
-                minW={"8rem"}
-                w={["10rem", "fit-content"]}
+                minW={"12rem"}
+                w={{ base: "12rem", sm: "14rem", lg: "fit-content" }}
               />
             </Box>
             <Box display="flex" justifyContent="end" gridColumn={3} order={3}>
@@ -95,7 +103,7 @@ export const Header = ({ pokemon }) => {
               display="flex"
               justifyContent="start"
               gridColumn={1}
-              order={[3, 1]}
+              order={{ base: 3, lg: 1 }}
             >
               <Button variant="link" onClick={() => goToHomePage(navigate)}>
                 <ChevronLeftIcon minW={15} minH={15} /> Todos Pokémons
@@ -110,11 +118,10 @@ export const Header = ({ pokemon }) => {
               <Image
                 src={Logo}
                 alt="Logo do Pokémon"
-                minW={"8rem"}
-                w={["10rem", "fit-content"]}
+                minW={"12rem"}
+                w={{ base: "12rem", sm: "14rem", lg: "fit-content" }}
               />
             </Box>
-            <Box gridColumn={3} minW={"4.5rem"} order={[1, 3]} />
           </>
         );
       case `/pokedex/${params.pokedexPage}`:
@@ -124,10 +131,10 @@ export const Header = ({ pokemon }) => {
               display="flex"
               justifyContent="start"
               gridColumn={1}
-              order={[3, 1]}
+              order={{ base: 3, lg: 1 }}
             >
-              <Button variant="link" onClick={() => goToHomePage(navigate)}>
-                <ChevronLeftIcon minW={15} minH={15} /> Todos Pokémons
+              <Button variant="link" onClick={() => navigate(-1)}>
+                <ChevronLeftIcon minW={15} minH={15} /> Página anterior
               </Button>
             </Box>
             <Box
@@ -139,11 +146,10 @@ export const Header = ({ pokemon }) => {
               <Image
                 src={Logo}
                 alt="Logo do Pokémon"
-                minW={"8rem"}
-                w={["10rem", "fit-content"]}
+                minW={"12rem"}
+                w={{ base: "12rem", sm: "14rem", lg: "fit-content" }}
               />
             </Box>
-            <Box gridColumn={3} minW={"4.5rem"} order={[1, 3]} />
           </>
         );
       case `/pokemon/${params.pokemon}`:
@@ -153,58 +159,48 @@ export const Header = ({ pokemon }) => {
               display="flex"
               justifyContent="start"
               gridColumn={1}
-              order={[2, 1]}
+              order={{ base: 2, lg: 1 }}
             >
-              <Button variant="link" onClick={() => navigate(-1)}>
-                <ChevronLeftIcon minW={15} minH={15} /> Página anterior
+              <Button variant="link" onClick={() => goToHomePage(navigate)}>
+                <ChevronLeftIcon minW={15} minH={15} /> Todos Pokémons
               </Button>
             </Box>
             <Box
               display="flex"
               justifyContent="center"
               gridColumn={2}
-              order={[1, 2]}
+              order={{ base: 1, lg: 2 }}
             >
               <Image
                 src={Logo}
                 alt="Logo do Pokémon"
-                minW={"8rem"}
-                w={["10rem", "fit-content"]}
+                minW={"12rem"}
+                w={{ base: "12rem", sm: "14rem", lg: "fit-content" }}
               />
             </Box>
             <Box display="flex" justifyContent="end" gridColumn={3} order={3}>
               {pokedex.find(
-                (pokemonInPokedex) => pokemon.name === pokemonInPokedex
+                (pokemonInPokedex) => pokemon.name === pokemonInPokedex.name
               ) ? (
                 <>
-                  <Button
-                    variant="delPokedex"
-                    onClick={() => {
-                      onOpen();
-                    }}
-                  >
+                  <Button variant="delPokedex" onClick={deleteModal}>
                     Excluir da Pokédex
                   </Button>
                   <PokemonModal
                     isOpen={isOpen}
-                    onClose={deleteModal}
+                    onClose={onClose}
                     title={"Oh, no!"}
                     body={"O Pokémon foi removido da sua Pokedéx"}
                   />
                 </>
               ) : (
                 <>
-                  <Button
-                    variant="addPokedex"
-                    onClick={() => {
-                      onOpen();
-                    }}
-                  >
+                  <Button variant="addPokedex" onClick={addModal}>
                     Adicionar na Pokédex
                   </Button>
                   <PokemonModal
                     isOpen={isOpen}
-                    onClose={addModal}
+                    onClose={onClose}
                     title={"Gotcha!"}
                     body={"O Pokémon foi adicionado a sua Pokédex"}
                   />
@@ -234,18 +230,18 @@ export const Header = ({ pokemon }) => {
 
   return (
     <Box
-      as="nav"
+      as="header"
       bg="white"
-      h="10rem"
-      px={["1rem", "2rem", "3rem"]}
-      display={["flex", "grid"]}
-      gridTemplateColumns="repeat(auto-fit, minmax(50px, 1fr))"
+      px={{ md: "1rem", lg: "2rem", "2xl": "3rem", "4xl": "5rem" }}
+      py={"3rem"}
+      display={{ base: "flex", lg: "grid" }}
+      gridTemplateColumns="repeat(3, 1fr)"
       alignItems={"center"}
       justifyContent={["center", "space-between"]}
       flexWrap={"wrap"}
       gridColumnGap={"1rem"}
       flexDirection={"column"}
-      rowGap={"0.5rem"}
+      rowGap={"1rem"}
     >
       {renderHeader()}
     </Box>

@@ -55,7 +55,7 @@ export const HomePage = () => {
       setCurrentPage(1);
       setOffset(0);
     } else {
-      setOffset((params.pageNumber - 1) * 21);
+      setOffset((params.pageNumber - 1) * 24);
     }
   }, [params.pageNumber, setCurrentPage, setOffset]);
 
@@ -69,21 +69,37 @@ export const HomePage = () => {
     <Flex direction="column">
       <Header />
       <Flex align={"center"} justify={"center"}>
-        <Box as="main" py={"3.75rem"} px={["0.7rem", "2rem"]}>
+        <Box
+          as="main"
+          py={"3.75rem"}
+          px={{ base: "0.5rem", sm: "1rem", md: "2rem" }}
+          maxW={{
+            base: "30rem",
+            xl: "60.5rem",
+            "3xl": "89.5rem",
+            "5xl": "118.5rem",
+          }}
+        >
           <Box
             display={"flex"}
             flexWrap={"wrap"}
             gap={"1.5rem"}
-            maxW={"115rem"}
-            w={"fit-content"}
             justifyContent={"center"}
+            alignItems={"center"}
           >
             <Heading
               as="h1"
-              size="xl"
+              size={{
+                base: "md",
+                md: "lg",
+                xl: "xl",
+              }}
               mb={"2rem"}
               w={"100%"}
-              textAlign={["center", "left"]}
+              textAlign={{
+                base: "center",
+                xl: "left",
+              }}
             >
               Todos os Pokémons
             </Heading>
