@@ -26,11 +26,17 @@ export function PokedexContextProvider({ children }) {
 
   const filteredPokedex = () => {
     let pokeList = [...pokedex];
+    pokeList.sort((a, b) => {
+      return a.id - b.id;
+    });
     pokeList = pokeList.slice(offset, pageSize);
     return pokeList;
   };
   const filteredPokedexPage = () => {
     let pokeList = [...pokedex];
+    pokeList.sort((a, b) => {
+      return a.id - b.id;
+    });
     pokeList = pokeList.slice(offset, offset + pageSize);
     return pokeList;
   };

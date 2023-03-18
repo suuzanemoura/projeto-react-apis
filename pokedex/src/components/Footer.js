@@ -38,7 +38,7 @@ const SocialButton = ({ children, label, href }) => {
 
 export const Footer = () => {
   return (
-    <Box bg={"white"} color={"black"}>
+    <Box bg={"white"} color={"black"} as="footer">
       <Container
         as={Stack}
         maxW={"6xl"}

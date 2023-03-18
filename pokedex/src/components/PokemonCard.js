@@ -39,13 +39,22 @@ export const PokemonCard = ({
   const { pokedex } = useContext(GlobalContext);
 
   const addModal = () => {
-    onClose();
-    addToPokedex(pokemon.name);
+    onOpen();
+    setTimeout(() => {
+      addToPokedex({
+        id: pokemon.id,
+        name: pokemon.name,
+      });
+      onClose();
+    }, 1500);
   };
 
   const deleteModal = () => {
-    onClose();
-    removeFromPokedex(pokemon.name);
+    onOpen();
+    setTimeout(() => {
+      removeFromPokedex(pokemon.name);
+      onClose();
+    }, 1500);
   };
 
   return (
@@ -87,15 +96,15 @@ export const PokemonCard = ({
           position={"relative"}
           display={"flex"}
           flexWrap={"wrap"}
-          w={["16rem", "26.5rem", "27.5rem"]}
-          h={"13.125rem"}
+          w={{ base: "16rem", sm: "18rem", "2sm": "20.5rem", md: "27.5rem" }}
+          h={{ base: "fit-content", "2sm": "13.125rem" }}
           borderRadius={"1rem"}
           backgroundImage={Pokebola}
           backgroundRepeat={"no-repeat"}
           backgroundPosition={"right"}
-          gap={["1.7rem", "1.7rem", "2rem"]}
+          gap={"2rem"}
           backgroundColor={getColors(pokemon.types[0].type.name)}
-          mt={["3.5rem", "2rem"]}
+          mt={{ base: "3.75rem", "2sm": "2rem" }}
         >
           <Box px={["1rem", "1.5rem"]} pt={"1.5rem"}>
             <Text
@@ -107,7 +116,7 @@ export const PokemonCard = ({
             </Text>
             <Heading
               as="h1"
-              fontSize={"2rem"}
+              fontSize={{ base: "1.5rem", md: "2rem" }}
               fontFamily={"'Inter', sans-serif"}
               fontWeight={"700"}
               textTransform="capitalize"
@@ -119,10 +128,15 @@ export const PokemonCard = ({
                 pokemon["sprites"]["other"]["official-artwork"]["front_default"]
               }
               alt={`Imagem do Pokémon ${pokemon.name}`}
-              w={["8rem", "12.063rem"]}
+              w={{ base: "8rem", md: "10rem", xl: "12.063rem" }}
               position={"absolute"}
-              right={["0", "0.2rem", "0.3rem"]}
-              bottom={["9.5rem", "4.5rem"]}
+              right={{
+                base: 0,
+                "2sm": "0.75rem",
+                md: "1.2rem",
+                xl: "0.3rem",
+              }}
+              top={{ base: "-5rem", "2sm": "-3.5rem" }}
             />
             <HStack mt={"0.4rem"}>
               {pokemon.types.map((type) => {
@@ -151,37 +165,29 @@ export const PokemonCard = ({
               Detalhes
             </Button>
             {pokedex.find(
-              (pokemonInPokedex) => pokemon.name === pokemonInPokedex
+              (pokemonInPokedex) => pokemon.name === pokemonInPokedex.name
             ) ? (
               <>
-                <Button
-                  variant={"delete"}
-                  onClick={() => {
-                    onOpen();
-                  }}
-                >
+                <Button variant={"delete"} onClick={deleteModal}>
                   Excluir
                 </Button>
                 <PokemonModal
                   isOpen={isOpen}
-                  onClose={deleteModal}
+                  onOpen={onOpen}
+                  onClose={onClose}
                   title={"Oh, no!"}
                   body={"O Pokémon foi removido da sua Pokedéx"}
                 />
               </>
             ) : (
               <>
-                <Button
-                  variant={"catch"}
-                  onClick={() => {
-                    onOpen();
-                  }}
-                >
+                <Button variant={"catch"} onClick={addModal}>
                   Capturar!
                 </Button>
                 <PokemonModal
                   isOpen={isOpen}
-                  onClose={addModal}
+                  onOpen={onOpen}
+                  onClose={onClose}
                   title={"Gotcha!"}
                   body={"O Pokémon foi adicionado a sua Pokédex"}
                 />
