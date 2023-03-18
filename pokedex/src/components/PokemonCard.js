@@ -104,7 +104,7 @@ export const PokemonCard = ({
           backgroundPosition={"right"}
           gap={"2rem"}
           backgroundColor={getColors(pokemon.types[0].type.name)}
-          mt={{ base: "3.75rem", "2sm": "2rem" }}
+          mt={{ base: "3.75rem", "2sm": "2.2rem", md: "2rem" }}
         >
           <Box px={["1rem", "1.5rem"]} pt={"1.5rem"}>
             <Text

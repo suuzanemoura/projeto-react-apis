@@ -125,8 +125,16 @@ export const PokemonDetailsPage = () => {
               borderRadius={"2.375rem"}
               backgroundImage={PokebolaCard}
               backgroundRepeat={"no-repeat"}
-              backgroundPosition={"right"}
-              backgroundSize={"contain"}
+              backgroundPosition={{ base: "top right", "3xl": "right" }}
+              backgroundSize={{
+                base: "60%",
+                sm: "50%",
+                "2sm": "40%",
+                md: "50%",
+                lg: "55%",
+                xl: "40%",
+                "3xl": "contain",
+              }}
               backgroundColor={getColors(pokemon.types[0].type.name)}
               display={"grid"}
               gridTemplateColumns={{ base: "1fr", "3xl": "repeat(2, 1fr)" }}
@@ -261,6 +269,7 @@ export const PokemonDetailsPage = () => {
                   display={"flex"}
                   alignItems={"center"}
                   justifyContent={"center"}
+                  fontSize={"0.5rem"}
                 >
                   <Image
                     src={
@@ -280,6 +289,7 @@ export const PokemonDetailsPage = () => {
                   display={"flex"}
                   alignItems={"center"}
                   justifyContent={"center"}
+                  fontSize={"0.5rem"}
                 >
                   <Image
                     src={
