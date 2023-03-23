@@ -1,5 +1,7 @@
 # Pokédex - Projeto React e API's
 
+https://user-images.githubusercontent.com/104701271/227346787-7611f33d-769d-4d2c-a760-ad162f0201e1.mp4
+
 ## Introdução
 
 O projeto é uma aplicação web contendo 1008 pokémons utilizando a API [PokeApi](https://pokeapi.co/). Contém as principais informações nas páginas de detalhes de cada pókemon individualmente e a possibilidade de capturar seus pókemons favoritos na pokédex.
