@@ -49,13 +49,17 @@ react-icons
 
 ### Funcionalidades
 
-- Listagem: Lista de 1008 pokémons principais dos 1281 disponíveis na PokeAPI, organizados por página (24 pokémons em cada);
-- Card: Cada pokémon é representado por um card que contém: nome, id, tipo, imagem, botão de captura e botão para página de detalhes.
-- Detalhes: Página com os principais detalhes do pókemon: nome, id, tipo, imagem, gif de front e back, base stats (estatísticas) e seus primeiros moves (movimentos).
-- Captura: Adicionar pokémons a pokédex;
-- Pokédex: Lista dos pokémons adicionados, representados por cards.
-- Excluir: Remover pokémons adicionados na pokédex.
-- Responsividade: Responsivo para Web, Tablet e Mobile.
+- Visualizar ista de 1008 pokémons principais dos 1281 disponíveis na PokeAPI, organizados por página (24 pokémons em cada);
+- Visualizar cada pokémon é representado por um card que contém: nome, id, tipo, imagem, botão de captura e botão para página de detalhes.
+- Visualizar página com os principais detalhes do pókemon: nome, id, tipo, imagem, gif de front e back, base stats (estatísticas) e seus primeiros moves (movimentos).
+- Adicionar pokémons a pokédex;
+- Visualizar Lista dos pokémons adicionados, representados por cards, na pokédex.
+- Remover pokémons adicionados na pokédex.
+- Responsivo para Web, Tablet e Mobile.
+
+### Status do projeto
+
+- Concluído ⏳
 
 ## Contato
 
