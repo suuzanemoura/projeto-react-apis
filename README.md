@@ -16,10 +16,10 @@ Este projeto é uma aplicação web desenvolvida em React que exibe 1008 pokémo
 
 ```bash
 # Clonar o repositório
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
+git clone https://github.com/suuzanemoura/projeto-react-apis.git
 
 # Acessar o diretório do projeto
-cd nome-do-repositorio
+cd projeto-react-apis
 
 # Instalar dependências
 npm install
